@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Code Chronicles (mostly)</title>
-    <link>https://sillyfellow.github.io/codicles/tags/</link>
+    <link>https://codicles.org/tags/</link>
     <description>Recent content in Tags on Code Chronicles (mostly)</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://sillyfellow.github.io/codicles/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://codicles.org/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
