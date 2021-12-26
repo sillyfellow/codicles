@@ -2,20 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://codicles.org/</loc>
+    <loc>https://sillyfellow.github.io/codicles/</loc>
     <lastmod>2021-12-26T12:19:43+01:00</lastmod>
   </url><url>
-    <loc>http://codicles.org/post/hello-world/</loc>
+    <loc>https://sillyfellow.github.io/codicles/post/hello-world/</loc>
     <lastmod>2021-12-26T12:19:43+01:00</lastmod>
   </url><url>
-    <loc>http://codicles.org/post/</loc>
+    <loc>https://sillyfellow.github.io/codicles/post/</loc>
     <lastmod>2021-12-26T12:19:43+01:00</lastmod>
   </url><url>
-    <loc>http://codicles.org/sillyfellow/</loc>
+    <loc>https://sillyfellow.github.io/codicles/sillyfellow/</loc>
     <lastmod>2021-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://codicles.org/categories/</loc>
+    <loc>https://sillyfellow.github.io/codicles/categories/</loc>
   </url><url>
-    <loc>http://codicles.org/tags/</loc>
+    <loc>https://sillyfellow.github.io/codicles/tags/</loc>
   </url>
 </urlset>
