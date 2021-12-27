@@ -33,7 +33,9 @@ int main() { printf(&amp;#34;hello world\n&amp;#34;) return 0 } </description>
       <pubDate>Sun, 26 Dec 2021 00:00:00 +0000</pubDate>
       
       <guid>https://codicles.org/sillyfellow/</guid>
-      <description>That&amp;rsquo;s me</description>
+      <description>A programmer, a polyglot, a carpenter Making a living by coding about 40 hours a week. Mostly in Python, Golang, Javascript, Bash, Ruby (on Rails), etc. Running a small software agency in Frankfurt.
+On a daily basis, communicating in English, Malayalam, Tamil, and German. When necessary a bit of Hindi as well. Very keen on adding more to the list.
+And finally, the new popular hobby for everyone and their dogs &amp;gt; Carpentry.</description>
     </item>
     
   </channel>
