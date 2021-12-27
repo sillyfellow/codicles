@@ -18,6 +18,16 @@
     </item>
     
     <item>
+      <title>A bit of python</title>
+      <link>https://codicles.org/post/python-snippet/</link>
+      <pubDate>Mon, 27 Dec 2021 00:00:00 +0100</pubDate>
+      
+      <guid>https://codicles.org/post/python-snippet/</guid>
+      <description>Snippet
+import os def get_env_variable(name) -&amp;gt; str: try: return os.environ[name] except KeyError: message = &amp;#34;Expected environment variable &amp;#39;{}&amp;#39; not set.&amp;#34;.format(name) raise Exception(message) &amp;ndash; sillyfellow @ [2021-12-27 Mon 15:28]</description>
+    </item>
+    
+    <item>
       <title>Hello World</title>
       <link>https://codicles.org/post/hello-world/</link>
       <pubDate>Sun, 26 Dec 2021 12:19:43 +0100</pubDate>
