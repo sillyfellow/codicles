@@ -5,7 +5,17 @@
     <link>https://codicles.org/</link>
     <description>Recent content on Code Chronicles (mostly)</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://codicles.org/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Mon, 03 Jan 2022 00:00:00 +0100</lastBuildDate><atom:link href="https://codicles.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hello World</title>
+      <link>https://codicles.org/post/helloworld/</link>
+      <pubDate>Mon, 03 Jan 2022 00:00:00 +0100</pubDate>
+      
+      <guid>https://codicles.org/post/helloworld/</guid>
+      <description>#include &amp;lt;stdio.h&amp;gt;int main() { printf(&amp;#34;Hello World!\n&amp;#34;); return 0; } &amp;ndash; sillyfellow @ [2022-01-03 Mon 09:14]</description>
+    </item>
+    
     <item>
       <title>About</title>
       <link>https://codicles.org/sillyfellow/</link>
