@@ -2,25 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://codicles.org/post/test-from-ok-easy-hugo/</loc>
-    <lastmod>2021-12-27T14:46:28+01:00</lastmod>
-  </url><url>
-    <loc>https://codicles.org/post/python-snippet/</loc>
-    <lastmod>2021-12-27T15:30:40+01:00</lastmod>
-  </url><url>
-    <loc>https://codicles.org/</loc>
-    <lastmod>2021-12-27T15:30:40+01:00</lastmod>
-  </url><url>
-    <loc>https://codicles.org/post/</loc>
-    <lastmod>2021-12-27T15:30:40+01:00</lastmod>
-  </url><url>
-    <loc>https://codicles.org/post/hello-world/</loc>
-    <lastmod>2021-12-26T12:19:43+01:00</lastmod>
-  </url><url>
     <loc>https://codicles.org/sillyfellow/</loc>
     <lastmod>2021-12-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://codicles.org/categories/</loc>
+  </url><url>
+    <loc>https://codicles.org/</loc>
   </url><url>
     <loc>https://codicles.org/tags/</loc>
   </url>
