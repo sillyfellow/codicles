@@ -6,17 +6,7 @@
     <description>Recent content on Code Chronicles (mostly)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 10 Feb 2022 00:00:00 +0100</lastBuildDate><atom:link href="https://codicles.org/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Setup a new server (Hetzner, EC2, etc.)</title>
-      <link>https://codicles.org/post/server-setup/</link>
-      <pubDate>Thu, 10 Feb 2022 00:00:00 +0100</pubDate>
-      
-      <guid>https://codicles.org/post/server-setup/</guid>
-      <description>TODO
-&amp;ndash; sillyfellow @ [2022-02-10 Thu 00:16]</description>
-    </item>
-    
+    <lastBuildDate>Mon, 03 Jan 2022 00:00:00 +0100</lastBuildDate><atom:link href="https://codicles.org/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hello World</title>
       <link>https://codicles.org/post/helloworld/</link>
@@ -24,16 +14,6 @@
       
       <guid>https://codicles.org/post/helloworld/</guid>
       <description>#include &amp;lt;stdio.h&amp;gt;int main() { printf(&amp;#34;Hello World!\n&amp;#34;); return 0; } &amp;ndash; sillyfellow @ [2022-01-03 Mon 09:14]</description>
-    </item>
-    
-    <item>
-      <title>Setup auto deployment from Private Github repo to EC2 instance</title>
-      <link>https://codicles.org/post/gh-private-to-aws-ect/</link>
-      <pubDate>Thu, 10 Feb 2022 00:00:00 +0100</pubDate>
-      
-      <guid>https://codicles.org/post/gh-private-to-aws-ect/</guid>
-      <description>TODO
-&amp;ndash; sillyfellow @ [2022-02-10 Thu 00:17]</description>
     </item>
     
     <item>
