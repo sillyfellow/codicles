@@ -6,7 +6,19 @@
     <description>Recent content in code on Code Chronicles (mostly)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 03 Jan 2022 00:00:00 +0100</lastBuildDate><atom:link href="https://codicles.org/tags/code/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 02 Oct 2022 00:00:00 +0200</lastBuildDate><atom:link href="https://codicles.org/tags/code/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How do I blog?</title>
+      <link>https://codicles.org/post/blogging-howto/</link>
+      <pubDate>Sun, 02 Oct 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://codicles.org/post/blogging-howto/</guid>
+      <description>I blog directly from Emacs (Org mode), using hugo-markdown export, and easy hugo.
+Org mode capture allows me to directly write to my entries.org file, which I then export the usual way (C-c C-e), but into the markdown file in the posts folder in my hugo website.
+And with easy-hugo, I just publish it. That&amp;rsquo;s it :)
+What I shall not forget is giving a proper name in the entries.org tags so that all is kept in order.</description>
+    </item>
+    
     <item>
       <title>Hello World</title>
       <link>https://codicles.org/post/helloworld/</link>
