@@ -62,7 +62,7 @@ pain minimal.&lt;/p&gt;
       <description>&lt;p&gt;I blog directly from Emacs (Org mode), using hugo-markdown export, and easy hugo.&lt;/p&gt;
 &lt;p&gt;Org mode capture allows me to directly write to my &lt;code&gt;entries.org&lt;/code&gt; file, which I then export the usual way (C-c C-e), but into the markdown file in the posts folder in my hugo website.&lt;/p&gt;
 &lt;p&gt;And with easy-hugo, I just publish it. That&amp;rsquo;s it :)&lt;/p&gt;
-&lt;p&gt;What I shall not forget is giving a proper name in the &lt;code&gt;entries.org&lt;/code&gt; tags so that all is kept in order.&lt;/p&gt;
+&lt;p&gt;What I shall not forget is giving a proper name in the &lt;code&gt;entries.org&lt;/code&gt; so that all is kept in order.&lt;/p&gt;
 &lt;p&gt;Of course, everything is in git/hub as well.&lt;/p&gt;
 </description>
       
