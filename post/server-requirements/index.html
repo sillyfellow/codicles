@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="Dr. Sandeep Sadanandan">
+
+  
+  
+  <meta name="description" content="Every now and then I have to create a new server. Sometimes in Python, sometimes in Javascript (lately more Typescript), sometimes it is Go. Rarely Rails (at least lately). Over time, the following are my self-inflicted requirements for a nice server. Just putting it out here for future reference. Also, I might just create a series about creating such a server (perhaps in Golang?)
+Database connection/s of course at least one type should be configured.">
+  
+
+  
+  <link rel="icon" href="https://codicles.org/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" Chronicles  emacs  programming  code ">
+  
+
+  
+  
+
+  
+  <meta property="og:title" content="Server requirements" />
+<meta property="og:description" content="Every now and then I have to create a new server. Sometimes in Python, sometimes in Javascript (lately more Typescript), sometimes it is Go. Rarely Rails (at least lately). Over time, the following are my self-inflicted requirements for a nice server. Just putting it out here for future reference. Also, I might just create a series about creating such a server (perhaps in Golang?)
+Database connection/s of course at least one type should be configured." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://codicles.org/post/server-requirements/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-06T00:00:00+02:00" />
+<meta property="article:modified_time" content="2023-08-06T22:53:11+02:00" />
+
+
+  
+  <link rel="canonical" href="https://codicles.org/post/server-requirements/">
+
+  
+  
+  <meta itemprop="name" content="Server requirements">
+<meta itemprop="description" content="Every now and then I have to create a new server. Sometimes in Python, sometimes in Javascript (lately more Typescript), sometimes it is Go. Rarely Rails (at least lately). Over time, the following are my self-inflicted requirements for a nice server. Just putting it out here for future reference. Also, I might just create a series about creating such a server (perhaps in Golang?)
+Database connection/s of course at least one type should be configured."><meta itemprop="datePublished" content="2023-08-06T00:00:00+02:00" />
+<meta itemprop="dateModified" content="2023-08-06T22:53:11+02:00" />
+<meta itemprop="wordCount" content="493">
+<meta itemprop="keywords" content="code,work," />
+
+  
+  <link media="screen" rel="stylesheet" href='https://codicles.org/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://codicles.org/css/content.css'>
+
+  
+  
+  <title>Server requirements - Code Chronicles (mostly)</title>
+  
+
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Server requirements"/>
+<meta name="twitter:description" content="Every now and then I have to create a new server. Sometimes in Python, sometimes in Javascript (lately more Typescript), sometimes it is Go. Rarely Rails (at least lately). Over time, the following are my self-inflicted requirements for a nice server. Just putting it out here for future reference. Also, I might just create a series about creating such a server (perhaps in Golang?)
+Database connection/s of course at least one type should be configured."/>
+
+
+  
+<link rel="stylesheet" href='https://codicles.org/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://codicles.org">Code Chronicles (mostly)</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">Home</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">Archives</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">About</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>Server requirements</h1>
+  
+  <div>
+    <b>Keywords: </b>
+    
+    <a class="link" href='https://codicles.org/tags/code'>#code</a>
+    
+    <a class="link" href='https://codicles.org/tags/work'>#work</a>
+    
+  </div>
+  
+  
+  <article class="content">
+    
+    <p>Every now and then I have to create a new server. Sometimes in Python, sometimes in Javascript (lately more Typescript), sometimes it is Go. Rarely Rails (at least lately). Over time, the following are my self-inflicted requirements for a nice server. Just putting it out here for future reference. Also, I might just create a series about creating such a server (perhaps in Golang?)</p>
+<ol>
+<li>Database connection/s
+<ul>
+<li>of course at least one type should be configured.</li>
+<li>but possibly with choice of environments - develop on psql, testing on sqlite (for example)
+<ul>
+<li>I&rsquo;ve found it quite nice to have local tests that can be run on against an in-memory sqlite DB</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Migration (either automatic on start, or with a simple trigger)
+<ul>
+<li>CRUD for entities, and similar things</li>
+<li>NOTE that this might get tricky with ability to run against different DBs.
+<ul>
+<li>In conflict, I think we stick with the DB of our choice and migrations win</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>/health endpoint
+<ul>
+<li>Should return something like <code>{ status: &quot;Ok&quot;, db_ping: &quot;43ns&quot;, version: &quot;x.yy.zzz&quot; }</code></li>
+<li>The DB ping is quite useful at times (if you ping takes longer, you can directly see there&rsquo;s a bit of load there)</li>
+</ul>
+</li>
+<li>NO global variables (must I explain?)</li>
+<li>NOTHING hardcoded
+<ul>
+<li>Env variables are to be read only in the main (entry method)</li>
+<li>And proper dependency injection</li>
+</ul>
+</li>
+<li>Swagger <strong>generated with annotations</strong>, not with a large yaml/json file
+<ul>
+<li>Would love if it is a smart/er system which generates from code itself ;)</li>
+</ul>
+</li>
+<li>One method <em>createServer(params)</em> should return
+<ul>
+<li>a server we can run, and</li>
+<li>a shutDownServer which will gracefully shut things down
+<ul>
+<li>(optional) proper disconnection from DB as well</li>
+<li>And to be called when we receive signals to die/kill</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Middle/After-ware which logs
+<ul>
+<li>Request arrival
+<ul>
+<li>possibility to turn on body/header logging</li>
+</ul>
+</li>
+<li>Request completion with time taken
+<ul>
+<li>possibility to turn on output logging</li>
+</ul>
+</li>
+<li>The possibility to add an arbitrary middleware
+<ul>
+<li>For example, something to add a dummy-header to the request.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Unit tests
+<ul>
+<li>Anything which is NOT an api call should be testable with unit tests
+<ul>
+<li>(optional) If possible the migration method should be tested too</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Integration/API tests
+<ul>
+<li>All apis should be testable (/health included)
+<ul>
+<li>Test the response code, and verify with another call, but not by looking into DB.</li>
+</ul>
+</li>
+<li>Create database at start</li>
+<li>Connect to database (in memory is fine too)</li>
+<li>NO tests shall call endpoints directly with path.
+<ul>
+<li>They shall be called as methods of server, or server like object.</li>
+</ul>
+</li>
+<li>On test completion, shutdown the server, disconnect the database
+<ul>
+<li>a nice teardown (though our db might be in memory or temporary file)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Internationalisation / Localisation
+<ul>
+<li>The request shall be able to send `Accepted-Language` header, and the response must respect it.</li>
+<li>Should have some kind of localised strings file.</li>
+</ul>
+</li>
+<li>Project shall be
+<ul>
+<li>structured to
+<ul>
+<li>entry-point.&lt;java|ts|go|js|py&gt;, (say main)</li>
+<li>and folders like routes/, models/, controllers/, repository/ (business logic), and /services</li>
+</ul>
+</li>
+<li>with rather limited package dependency</li>
+<li>compile/runnable and testable with simple commands, small script, etc.</li>
+</ul>
+</li>
+<li>Basic auth endpoints, sessions, tokens, etc. without JWT (I personally dislike JWT)</li>
+</ol>
+<p>&ndash; sillyfellow on 2023-08-06 (Sun 22:47)</p>
+
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="https://codicles.org/post/git-pain-optimisation/">← prev</a>
+    
+    
+    <a></a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span>© 2019</span> - <span>2023</span>
+  </div>
+
+  <div>
+    <span>Powered by </span>
+    <a class="link" href="https://gohugo.io/">Hugo</a>
+    <span> 🍦 Theme </span>
+    <a class="link" href="https://github.com/queensferryme/hugo-theme-texify">TeXify</a>
+  </div>
+
+  <div class="footnote">
+    <span>        Follow me on <a class=link href=https://github.com/sillyfellow>GitHub</a>,
+        <a class=link href=https://twitter.com/sadanandeep>Twitter</a> or
+        <a class=link href=/index.xml>RSS</a> |
+        <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener>CC BY-NC-SA 4.0</a>
+        </span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+  <link media="screen" rel="stylesheet" href="https://codicles.org/css/custom.css" />
+  
+
+  
+  
+  <script src="https://codicles.org/js/custom.js"></script>
+  
+
+  
+  
+
+</body>
+
+</html>

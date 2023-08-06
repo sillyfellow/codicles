@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>code on Code Chronicles (mostly)</title>
-    <link>https://codicles.org/tags/code/</link>
-    <description>Recent content in code on Code Chronicles (mostly)</description>
+    <title>work on Code Chronicles (mostly)</title>
+    <link>https://codicles.org/tags/work/</link>
+    <description>Recent content in work on Code Chronicles (mostly)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</managingEditor>
     <webMaster>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</webMaster>
-    <lastBuildDate>Sun, 06 Aug 2023 00:00:00 +0200</lastBuildDate><atom:link href="https://codicles.org/tags/code/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Aug 2023 00:00:00 +0200</lastBuildDate><atom:link href="https://codicles.org/tags/work/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Server requirements</title>
       <link>https://codicles.org/post/server-requirements/</link>
@@ -137,82 +137,6 @@
 &lt;li&gt;Basic auth endpoints, sessions, tokens, etc. without JWT (I personally dislike JWT)&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&amp;ndash; sillyfellow on 2023-08-06 (Sun 22:47)&lt;/p&gt;
-</description>
-      
-    </item>
-    
-    <item>
-      <title>Git pain optimisation</title>
-      <link>https://codicles.org/post/git-pain-optimisation/</link>
-      <pubDate>Wed, 26 Oct 2022 00:00:00 +0200</pubDate>
-      <author>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</author>
-      <guid>https://codicles.org/post/git-pain-optimisation/</guid>
-      
-      <description>&lt;p&gt;I have been thinking a bit about git and the tools that help us with
-it.&lt;/p&gt;
-&lt;p&gt;Git is a super powerful tool, but with quite complicated ways of
-working.&lt;/p&gt;
-&lt;p&gt;And to most of the developers, the interface in the command line is
-hard.&lt;/p&gt;
-&lt;p&gt;That usually leads them to using some UI which claims to make things
-easier by abstracting details away (that is, the UI claims to do
-the magic).&lt;/p&gt;
-&lt;p&gt;All what I have seen so far tells me that this results in quite
-unexpected behaviour (well, funnily enough sometimes we don&amp;rsquo;t even
-know what is the expected behaviour). And every time this unexpected
-things come along, one has to spend a good amount of time to fix it
-(and that is possible only with the CLI)&lt;/p&gt;
-&lt;p&gt;To make it worse for me, in most of the projects I&amp;rsquo;m in, the person
-who bears this pain is yours truly.&lt;/p&gt;
-&lt;p&gt;This is mainly because the developers of the UI tool are probably
-confused too, and finds it hard to communicate with the users
-correctly - resulting in a tool which claims to do magic, but performs
-the wrong trick.&lt;/p&gt;
-&lt;p&gt;The one and only solution I have seen which works (not claiming it is
-easy), and completely avoids all or any kind of surprise is the git
-command line.&lt;/p&gt;
-&lt;p&gt;I use perhaps 2% of the power of git, but only from CLI and
-very very rarely do I end up in a soup.&lt;/p&gt;
-&lt;p&gt;My regular pain is probably ever so little more than the pain of the
-UI tool user. But that is my worst pain, but never do I have to suffer
-anything worse.&lt;/p&gt;
-&lt;p&gt;So, please go ahead and learn those 10 git cli commands and get out of
-the habit of using a fancy tool which merges in the wrong direction or
-rebases incorrectly to drive you mad. That&amp;rsquo;ll pay off and keep your
-pain minimal.&lt;/p&gt;
-</description>
-      
-    </item>
-    
-    <item>
-      <title>How do I blog?</title>
-      <link>https://codicles.org/post/blogging-howto/</link>
-      <pubDate>Sun, 02 Oct 2022 00:00:00 +0200</pubDate>
-      <author>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</author>
-      <guid>https://codicles.org/post/blogging-howto/</guid>
-      
-      <description>&lt;p&gt;I blog directly from Emacs (Org mode), using hugo-markdown export, and easy hugo.&lt;/p&gt;
-&lt;p&gt;Org mode capture allows me to directly write to my &lt;code&gt;entries.org&lt;/code&gt; file, which I then export the usual way (C-c C-e), but into the markdown file in the posts folder in my hugo website.&lt;/p&gt;
-&lt;p&gt;And with easy-hugo, I just publish it. That&amp;rsquo;s it :)&lt;/p&gt;
-&lt;p&gt;What I shall not forget is giving a proper name in the &lt;code&gt;entries.org&lt;/code&gt; so that all is kept in order.&lt;/p&gt;
-&lt;p&gt;Of course, everything is in git/hub as well.&lt;/p&gt;
-</description>
-      
-    </item>
-    
-    <item>
-      <title>Hello World</title>
-      <link>https://codicles.org/post/helloworld/</link>
-      <pubDate>Mon, 03 Jan 2022 00:00:00 +0100</pubDate>
-      <author>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</author>
-      <guid>https://codicles.org/post/helloworld/</guid>
-      
-      <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#080&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#080&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#0b0;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#00a000&#34;&gt;main&lt;/span&gt;() {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   &lt;span style=&#34;color:#00a000&#34;&gt;printf&lt;/span&gt;(&lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;Hello World!&lt;/span&gt;&lt;span style=&#34;color:#b62;font-weight:bold&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#666&#34;&gt;0&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&amp;ndash; sillyfellow @ &lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;[2022-01-03 Mon 09:14]&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
 </description>
       
     </item>

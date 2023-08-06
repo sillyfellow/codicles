@@ -8,7 +8,139 @@
     <language>en-us</language>
     <managingEditor>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</managingEditor>
     <webMaster>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</webMaster>
-    <lastBuildDate>Wed, 26 Oct 2022 00:00:00 +0200</lastBuildDate><atom:link href="https://codicles.org/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Aug 2023 00:00:00 +0200</lastBuildDate><atom:link href="https://codicles.org/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Server requirements</title>
+      <link>https://codicles.org/post/server-requirements/</link>
+      <pubDate>Sun, 06 Aug 2023 00:00:00 +0200</pubDate>
+      <author>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</author>
+      <guid>https://codicles.org/post/server-requirements/</guid>
+      
+      <description>&lt;p&gt;Every now and then I have to create a new server. Sometimes in Python, sometimes in Javascript (lately more Typescript), sometimes it is Go. Rarely Rails (at least lately). Over time, the following are my self-inflicted requirements for a nice server. Just putting it out here for future reference. Also, I might just create a series about creating such a server (perhaps in Golang?)&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Database connection/s
+&lt;ul&gt;
+&lt;li&gt;of course at least one type should be configured.&lt;/li&gt;
+&lt;li&gt;but possibly with choice of environments - develop on psql, testing on sqlite (for example)
+&lt;ul&gt;
+&lt;li&gt;I&amp;rsquo;ve found it quite nice to have local tests that can be run on against an in-memory sqlite DB&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Migration (either automatic on start, or with a simple trigger)
+&lt;ul&gt;
+&lt;li&gt;CRUD for entities, and similar things&lt;/li&gt;
+&lt;li&gt;NOTE that this might get tricky with ability to run against different DBs.
+&lt;ul&gt;
+&lt;li&gt;In conflict, I think we stick with the DB of our choice and migrations win&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;/health endpoint
+&lt;ul&gt;
+&lt;li&gt;Should return something like &lt;code&gt;{ status: &amp;quot;Ok&amp;quot;, db_ping: &amp;quot;43ns&amp;quot;, version: &amp;quot;x.yy.zzz&amp;quot; }&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The DB ping is quite useful at times (if you ping takes longer, you can directly see there&amp;rsquo;s a bit of load there)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;NO global variables (must I explain?)&lt;/li&gt;
+&lt;li&gt;NOTHING hardcoded
+&lt;ul&gt;
+&lt;li&gt;Env variables are to be read only in the main (entry method)&lt;/li&gt;
+&lt;li&gt;And proper dependency injection&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Swagger &lt;strong&gt;generated with annotations&lt;/strong&gt;, not with a large yaml/json file
+&lt;ul&gt;
+&lt;li&gt;Would love if it is a smart/er system which generates from code itself ;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;One method &lt;em&gt;createServer(params)&lt;/em&gt; should return
+&lt;ul&gt;
+&lt;li&gt;a server we can run, and&lt;/li&gt;
+&lt;li&gt;a shutDownServer which will gracefully shut things down
+&lt;ul&gt;
+&lt;li&gt;(optional) proper disconnection from DB as well&lt;/li&gt;
+&lt;li&gt;And to be called when we receive signals to die/kill&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Middle/After-ware which logs
+&lt;ul&gt;
+&lt;li&gt;Request arrival
+&lt;ul&gt;
+&lt;li&gt;possibility to turn on body/header logging&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Request completion with time taken
+&lt;ul&gt;
+&lt;li&gt;possibility to turn on output logging&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The possibility to add an arbitrary middleware
+&lt;ul&gt;
+&lt;li&gt;For example, something to add a dummy-header to the request.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Unit tests
+&lt;ul&gt;
+&lt;li&gt;Anything which is NOT an api call should be testable with unit tests
+&lt;ul&gt;
+&lt;li&gt;(optional) If possible the migration method should be tested too&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Integration/API tests
+&lt;ul&gt;
+&lt;li&gt;All apis should be testable (/health included)
+&lt;ul&gt;
+&lt;li&gt;Test the response code, and verify with another call, but not by looking into DB.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Create database at start&lt;/li&gt;
+&lt;li&gt;Connect to database (in memory is fine too)&lt;/li&gt;
+&lt;li&gt;NO tests shall call endpoints directly with path.
+&lt;ul&gt;
+&lt;li&gt;They shall be called as methods of server, or server like object.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;On test completion, shutdown the server, disconnect the database
+&lt;ul&gt;
+&lt;li&gt;a nice teardown (though our db might be in memory or temporary file)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Internationalisation / Localisation
+&lt;ul&gt;
+&lt;li&gt;The request shall be able to send `Accepted-Language` header, and the response must respect it.&lt;/li&gt;
+&lt;li&gt;Should have some kind of localised strings file.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Project shall be
+&lt;ul&gt;
+&lt;li&gt;structured to
+&lt;ul&gt;
+&lt;li&gt;entry-point.&amp;lt;java|ts|go|js|py&amp;gt;, (say main)&lt;/li&gt;
+&lt;li&gt;and folders like routes/, models/, controllers/, repository/ (business logic), and /services&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;with rather limited package dependency&lt;/li&gt;
+&lt;li&gt;compile/runnable and testable with simple commands, small script, etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Basic auth endpoints, sessions, tokens, etc. without JWT (I personally dislike JWT)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&amp;ndash; sillyfellow on 2023-08-06 (Sun 22:47)&lt;/p&gt;
+</description>
+      
+    </item>
+    
     <item>
       <title>Git pain optimisation</title>
       <link>https://codicles.org/post/git-pain-optimisation/</link>
