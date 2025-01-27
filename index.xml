@@ -8,19 +8,6 @@
     <language>en-us</language>
     <lastBuildDate>Mon, 27 Jan 2025 00:00:00 +0100</lastBuildDate><atom:link href="https://codicles.org/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Test entry</title>
-      <link>https://codicles.org/post/test-entry/</link>
-      <pubDate>Mon, 27 Jan 2025 00:00:00 +0100</pubDate>
-      
-      <guid>https://codicles.org/post/test-entry/</guid>
-      
-      <description>&lt;p&gt;Everything is a test&lt;/p&gt;
-&lt;p&gt;&amp;ndash; sillyfellow @ &lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;[2025-01-27 Mon 22:23]&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
-</description>
-      
-    </item>
-    
-    <item>
       <title>Git pain optimisation</title>
       <link>https://codicles.org/post/git-pain-optimisation/</link>
       <pubDate>Wed, 26 Oct 2022 00:00:00 +0200</pubDate>
