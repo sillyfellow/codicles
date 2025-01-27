@@ -6,137 +6,16 @@
     <description>Recent content in Posts on Code Chronicles (mostly)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</managingEditor>
-    <webMaster>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</webMaster>
-    <lastBuildDate>Sun, 06 Aug 2023 00:00:00 +0200</lastBuildDate><atom:link href="https://codicles.org/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Jan 2025 00:00:00 +0100</lastBuildDate><atom:link href="https://codicles.org/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Server requirements</title>
-      <link>https://codicles.org/post/server-requirements/</link>
-      <pubDate>Sun, 06 Aug 2023 00:00:00 +0200</pubDate>
-      <author>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</author>
-      <guid>https://codicles.org/post/server-requirements/</guid>
+      <title>Test entry</title>
+      <link>https://codicles.org/post/test-entry/</link>
+      <pubDate>Mon, 27 Jan 2025 00:00:00 +0100</pubDate>
       
-      <description>&lt;p&gt;Every now and then I have to create a new server. Sometimes in Python, sometimes in Javascript (lately more Typescript), sometimes it is Go. Rarely Rails (at least lately). Over time, the following are my self-inflicted requirements for a nice server. Just putting it out here for future reference. Also, I might just create a series about creating such a server (perhaps in Golang?)&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Database connection/s
-&lt;ul&gt;
-&lt;li&gt;of course at least one type should be configured.&lt;/li&gt;
-&lt;li&gt;but possibly with choice of environments - develop on psql, testing on sqlite (for example)
-&lt;ul&gt;
-&lt;li&gt;I&amp;rsquo;ve found it quite nice to have local tests that can be run on against an in-memory sqlite DB&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Migration (either automatic on start, or with a simple trigger)
-&lt;ul&gt;
-&lt;li&gt;CRUD for entities, and similar things&lt;/li&gt;
-&lt;li&gt;NOTE that this might get tricky with ability to run against different DBs.
-&lt;ul&gt;
-&lt;li&gt;In conflict, I think we stick with the DB of our choice and migrations win&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;/health endpoint
-&lt;ul&gt;
-&lt;li&gt;Should return something like &lt;code&gt;{ status: &amp;quot;Ok&amp;quot;, db_ping: &amp;quot;43ns&amp;quot;, version: &amp;quot;x.yy.zzz&amp;quot; }&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;The DB ping is quite useful at times (if you ping takes longer, you can directly see there&amp;rsquo;s a bit of load there)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;NO global variables (must I explain?)&lt;/li&gt;
-&lt;li&gt;NOTHING hardcoded
-&lt;ul&gt;
-&lt;li&gt;Env variables are to be read only in the main (entry method)&lt;/li&gt;
-&lt;li&gt;And proper dependency injection&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Swagger &lt;strong&gt;generated with annotations&lt;/strong&gt;, not with a large yaml/json file
-&lt;ul&gt;
-&lt;li&gt;Would love if it is a smart/er system which generates from code itself ;)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;One method &lt;em&gt;createServer(params)&lt;/em&gt; should return
-&lt;ul&gt;
-&lt;li&gt;a server we can run, and&lt;/li&gt;
-&lt;li&gt;a shutDownServer which will gracefully shut things down
-&lt;ul&gt;
-&lt;li&gt;(optional) proper disconnection from DB as well&lt;/li&gt;
-&lt;li&gt;And to be called when we receive signals to die/kill&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Middle/After-ware which logs
-&lt;ul&gt;
-&lt;li&gt;Request arrival
-&lt;ul&gt;
-&lt;li&gt;possibility to turn on body/header logging&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Request completion with time taken
-&lt;ul&gt;
-&lt;li&gt;possibility to turn on output logging&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;The possibility to add an arbitrary middleware
-&lt;ul&gt;
-&lt;li&gt;For example, something to add a dummy-header to the request.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Unit tests
-&lt;ul&gt;
-&lt;li&gt;Anything which is NOT an api call should be testable with unit tests
-&lt;ul&gt;
-&lt;li&gt;(optional) If possible the migration method should be tested too&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Integration/API tests
-&lt;ul&gt;
-&lt;li&gt;All apis should be testable (/health included)
-&lt;ul&gt;
-&lt;li&gt;Test the response code, and verify with another call, but not by looking into DB.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Create database at start&lt;/li&gt;
-&lt;li&gt;Connect to database (in memory is fine too)&lt;/li&gt;
-&lt;li&gt;NO tests shall call endpoints directly with path.
-&lt;ul&gt;
-&lt;li&gt;They shall be called as methods of server, or server like object.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;On test completion, shutdown the server, disconnect the database
-&lt;ul&gt;
-&lt;li&gt;a nice teardown (though our db might be in memory or temporary file)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Internationalisation / Localisation
-&lt;ul&gt;
-&lt;li&gt;The request shall be able to send `Accepted-Language` header, and the response must respect it.&lt;/li&gt;
-&lt;li&gt;Should have some kind of localised strings file.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Project shall be
-&lt;ul&gt;
-&lt;li&gt;structured to
-&lt;ul&gt;
-&lt;li&gt;entry-point.&amp;lt;java|ts|go|js|py&amp;gt;, (say main)&lt;/li&gt;
-&lt;li&gt;and folders like routes/, models/, controllers/, repository/ (business logic), and /services&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;with rather limited package dependency&lt;/li&gt;
-&lt;li&gt;compile/runnable and testable with simple commands, small script, etc.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Basic auth endpoints, sessions, tokens, etc. without JWT (I personally dislike JWT)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&amp;ndash; sillyfellow on 2023-08-06 (Sun 22:47)&lt;/p&gt;
+      <guid>https://codicles.org/post/test-entry/</guid>
+      
+      <description>&lt;p&gt;Everything is a test&lt;/p&gt;
+&lt;p&gt;&amp;ndash; sillyfellow @ &lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;[2025-01-27 Mon 22:23]&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
 </description>
       
     </item>
@@ -145,7 +24,7 @@
       <title>Git pain optimisation</title>
       <link>https://codicles.org/post/git-pain-optimisation/</link>
       <pubDate>Wed, 26 Oct 2022 00:00:00 +0200</pubDate>
-      <author>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</author>
+      
       <guid>https://codicles.org/post/git-pain-optimisation/</guid>
       
       <description>&lt;p&gt;I have been thinking a bit about git and the tools that help us with
@@ -188,7 +67,7 @@ pain minimal.&lt;/p&gt;
       <title>How do I blog?</title>
       <link>https://codicles.org/post/blogging-howto/</link>
       <pubDate>Sun, 02 Oct 2022 00:00:00 +0200</pubDate>
-      <author>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</author>
+      
       <guid>https://codicles.org/post/blogging-howto/</guid>
       
       <description>&lt;p&gt;I blog directly from Emacs (Org mode), using hugo-markdown export, and easy hugo.&lt;/p&gt;
@@ -204,7 +83,7 @@ pain minimal.&lt;/p&gt;
       <title>Hello World</title>
       <link>https://codicles.org/post/helloworld/</link>
       <pubDate>Mon, 03 Jan 2022 00:00:00 +0100</pubDate>
-      <author>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</author>
+      
       <guid>https://codicles.org/post/helloworld/</guid>
       
       <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#080&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#080&#34;&gt;
@@ -213,6 +92,341 @@ pain minimal.&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#666&#34;&gt;0&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&amp;ndash; sillyfellow @ &lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;[2022-01-03 Mon 09:14]&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>Refresh token (access token)</title>
+      <link>https://codicles.org/post/auth-session-tokens-refresh-etc/</link>
+      <pubDate>Fri, 01 Dec 2023 16:24:03 +0100</pubDate>
+      
+      <guid>https://codicles.org/post/auth-session-tokens-refresh-etc/</guid>
+      
+      <description>&lt;ul&gt;
+&lt;li&gt;Do not use JWT (Just DON&amp;rsquo;T)&lt;/li&gt;
+&lt;li&gt;Always have a sessions table
+&lt;ul&gt;
+&lt;li&gt;Which belongs to the USER
+&lt;ul&gt;
+&lt;li&gt;i.e., sessions table has a user_id column&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Have access_token and refresh_token
+&lt;ul&gt;
+&lt;li&gt;ideally as varchar(256), not text&lt;/li&gt;
+&lt;li&gt;do not allow them to grow&lt;/li&gt;
+&lt;li&gt;security shall be mostly based on rotation, not purely on length&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Must have access_token_expires_at and refresh_token_expires at columns (both datetime, and keep them as UTC)
+&lt;ul&gt;
+&lt;li&gt;make sure to have these columns calculated during the creation of the session. Do not think of doing &amp;ldquo;time-math&amp;rdquo; for calculating expiry.
+&lt;ul&gt;
+&lt;li&gt;Because, you may login with one server, but the next server you have the auth checked might have a different time stamp/zone&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;access/refresh tokens shall be unique&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;From the above, it becomes possible to have multiple active sessions for one user.
+&lt;ul&gt;
+&lt;li&gt;If that is not desired, restrict that at code level, not at DB level&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Generate random strings for access token and refresh token
+&lt;ul&gt;
+&lt;li&gt;keep them URLsafe (you&amp;rsquo;ll thank me when you have a mobile app)&lt;/li&gt;
+&lt;li&gt;Keep them about 256 char long
+&lt;ul&gt;
+&lt;li&gt;no longer&lt;/li&gt;
+&lt;li&gt;no shorter&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Make access_expiry in a few minutes, and refresh_expiry in a few days&lt;/li&gt;
+&lt;li&gt;Standard auth is having authorisation header
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Authorisation: Bearer &amp;lt;access-token&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Refresh token will require
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Authorisation: Bearer &amp;lt;refresh-token&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Deal with Auth always in a middleware and keep the logged in user, or the session found by looking up the access_token (or refresh_token) in the sessions table&lt;/li&gt;
+&lt;li&gt;On refresh, delete the current session object, and create a new one with new
+&lt;ul&gt;
+&lt;li&gt;access_token, and new expiry in a few minutes&lt;/li&gt;
+&lt;li&gt;refresh_token, with new expiry in a few days&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Disallow refresh if the refresh token is already expired&lt;/li&gt;
+&lt;li&gt;So, if a user logs in and is inactive for a few days, the refresh token expires, and they will have to login fresh again&lt;/li&gt;
+&lt;li&gt;But as long as the user does a &amp;ldquo;refresh&amp;rdquo; before the refresh-token is expired, they will have sessions alive always.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://codicles.org/post/kb/</link>
+      <pubDate>Fri, 01 Dec 2023 16:21:49 +0100</pubDate>
+      
+      <guid>https://codicles.org/post/kb/</guid>
+      
+      <description>&lt;h2 id=&#34;2023&#34;&gt;2023&lt;/h2&gt;
+&lt;h3 id=&#34;2023-08-august&#34;&gt;2023-08 August&lt;/h3&gt;
+&lt;h4 id=&#34;2023-08-21-monday&#34;&gt;2023-08-21 Monday&lt;/h4&gt;
+&lt;!--list-separator--&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;PlantUML and GraphViz (DOT)&lt;/p&gt;
+ &lt;!--list-separator--&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;PlantUML&lt;/p&gt;
+&lt;p&gt;It is a tool (Java library/package) that helps one to create UML diagrams with ease.&lt;/p&gt;
+&lt;p&gt;For the full details of it, one should look at &lt;a href=&#34;https://plantuml.com/&#34;&gt;https://plantuml.com/&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The basic idea is that you write the diagram you need in plain text, and then using java + plantuml.jar (downloaded from the website above), generate a nice diagram.&lt;/p&gt;
+&lt;p&gt;Your steps&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Setup java on your machine&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Download PlantUML.jar&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create your text file for the diagram (see example here)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;@startuml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;title Your title
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;center footer Your footer
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;skinparam classFontName Georgia
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;skinparam roundcorner 20
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;skinparam defaultFontName Georgia
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;skinparam dpi 160
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;participant &amp;#34;Participant Fellow&amp;#34; as participant
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;actor       Actor       as actor
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;boundary    Boundary    as boundary
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;control     Control     as control
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;entity      Entity      as entity
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;database    Database    as db
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;collections Collections as colls
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;queue       Queue       as q
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;participant  -&amp;gt; actor : To actor
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;participant  -&amp;gt; boundary : To boundary
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;participant  -&amp;gt; control : To control
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;participant  -&amp;gt; entity : To entity
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;participant  -&amp;gt; db : To database
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;participant  -&amp;gt; colls : To collections
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;participant  -&amp;gt; q: To queue
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;boundary -&amp;gt; actor : To actor
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;control -&amp;gt; boundary : To boundary
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;db -&amp;gt; control : To control
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;actor -&amp;gt; entity : To entity
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;entity -&amp;gt; db : To database
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;q -&amp;gt; colls : To collections
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;colls -&amp;gt; q: To queue
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;@enduml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Compile&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-nil&#34; data-lang=&#34;nil&#34;&gt;export JAVA_HOME=$(/usr/libexec/java_home) # set the JAVA_HOME variable
+java -jar path/to/plantuml.jar -verbose &amp;lt;inputfile&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You will have the output as png in the folder.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;https://codicles.org/ox-hugo/sample-plantuml-output.png&#34;&gt;
+            &lt;/figure&gt;
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+ &lt;!--list-separator--&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;DOT / Grapviz&lt;/p&gt;
+&lt;p&gt;For this, you need to install graphviz on your system and should have the command &lt;code&gt;dot&lt;/code&gt; available.&lt;/p&gt;
+&lt;p&gt;Installation is straight forward in *nix machines. See &lt;a href=&#34;https://graphviz.org/&#34;&gt;https://graphviz.org/&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install Graphviz, have Dot&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create input file (example)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;digraph name  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        Sample -&amp;gt; Diagram -&amp;gt; Workflow;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        Test -&amp;gt; Diagram;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        Sample -&amp;gt; Workflow
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run command &lt;code&gt;dot -Tpng input.file &amp;gt; output.png&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You have the output ready.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;https://codicles.org/ox-hugo/pf-workflow.png&#34;&gt;
+            &lt;/figure&gt;
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2023-09-september&#34;&gt;2023-09 September&lt;/h3&gt;
+&lt;h4 id=&#34;2023-09-04-monday&#34;&gt;2023-09-04 Monday&lt;/h4&gt;
+&lt;!--list-separator--&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Marshaling magic in Golang&lt;/p&gt;
+&lt;p&gt;If you want to customise the json representation of a field in a golang struct, you can just add some custome JSON tag&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;type&lt;/span&gt; OneStruct &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;struct&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     PublicField &lt;span style=&#34;color:#b44&#34;&gt;`json&amp;#34;public_field&amp;#34;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     AnotherField &lt;span style=&#34;color:#b44&#34;&gt;`json:&amp;#34;camelCasedInJSON&amp;#34;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This won&amp;rsquo;t help you expose private fields. If you want to expose them, you need to override the &lt;code&gt;MarshalJSON&lt;/code&gt; method of the struct.
+See the example below&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;package&lt;/span&gt; main
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;import&lt;/span&gt; (
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;encoding/json&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;type&lt;/span&gt; MyStruct &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;struct&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        UpperCase &lt;span style=&#34;color:#0b0;font-weight:bold&#34;&gt;string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        lowerCase &lt;span style=&#34;color:#0b0;font-weight:bold&#34;&gt;string&lt;/span&gt; &lt;span style=&#34;color:#080;font-style:italic&#34;&gt;// NOTE: This field is not exported, and will not be in the json
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;&lt;/span&gt;        secret    &lt;span style=&#34;color:#0b0;font-weight:bold&#34;&gt;string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;// createStruct creates a struct with an exported and an unexported field.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#00a000&#34;&gt;createStruct&lt;/span&gt;() &lt;span style=&#34;color:#666&#34;&gt;*&lt;/span&gt;MyStruct {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#666&#34;&gt;&amp;amp;&lt;/span&gt;MyStruct{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                UpperCase: &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;UPPER&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                lowerCase: &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;lower&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;// we implement the Marshaler interface for our struct.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;// This means that when we call json.Marshal on our struct, this
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;// method will be called.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;func&lt;/span&gt; (s &lt;span style=&#34;color:#666&#34;&gt;*&lt;/span&gt;MyStruct) &lt;span style=&#34;color:#00a000&#34;&gt;MarshalJSON&lt;/span&gt;() ([]&lt;span style=&#34;color:#0b0;font-weight:bold&#34;&gt;byte&lt;/span&gt;, &lt;span style=&#34;color:#0b0;font-weight:bold&#34;&gt;error&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#080;font-style:italic&#34;&gt;// we create a new &amp;#34;marshalable&amp;#34; struct with the fields we want to
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#080;font-style:italic&#34;&gt;// export. We do not need to create a new type for this, we can
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#080;font-style:italic&#34;&gt;// just use a struct literal.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        marshalable &lt;span style=&#34;color:#666&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;struct&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                UpperCase &lt;span style=&#34;color:#0b0;font-weight:bold&#34;&gt;string&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;`json:&amp;#34;upperCase&amp;#34;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                LowerCase &lt;span style=&#34;color:#0b0;font-weight:bold&#34;&gt;string&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;`json:&amp;#34;lower_case&amp;#34;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#080;font-style:italic&#34;&gt;// NOTE: The order of the keys is not guaranteed.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#080;font-style:italic&#34;&gt;&lt;/span&gt;                UpperCase: s.UpperCase,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                LowerCase: s.lowerCase,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;return&lt;/span&gt; json.&lt;span style=&#34;color:#00a000&#34;&gt;Marshal&lt;/span&gt;(marshalable)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#00a000&#34;&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ourStruct &lt;span style=&#34;color:#666&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#00a000&#34;&gt;createStruct&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        json, err &lt;span style=&#34;color:#666&#34;&gt;:=&lt;/span&gt; json.&lt;span style=&#34;color:#00a000&#34;&gt;Marshal&lt;/span&gt;(ourStruct)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;if&lt;/span&gt; err &lt;span style=&#34;color:#666&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;nil&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                fmt.&lt;span style=&#34;color:#00a000&#34;&gt;Println&lt;/span&gt;(err.&lt;span style=&#34;color:#00a000&#34;&gt;Error&lt;/span&gt;())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;return&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        fmt.&lt;span style=&#34;color:#00a000&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#a2f&#34;&gt;string&lt;/span&gt;(json))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&amp;ndash; sillyfellow @ &lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;[2023-09-04 Mon 11:17]&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2023-12-december&#34;&gt;2023-12 December&lt;/h3&gt;
+&lt;h4 id=&#34;2023-12-01-friday&#34;&gt;2023-12-01 Friday&lt;/h4&gt;
+&lt;!--list-separator--&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Refresh token (access token)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Do not use JWT (Just DON&amp;rsquo;T)&lt;/li&gt;
+&lt;li&gt;Always have a sessions table
+&lt;ul&gt;
+&lt;li&gt;Which belongs to the USER
+&lt;ul&gt;
+&lt;li&gt;i.e., sessions table has a user_id column&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Have access_token and refresh_token
+&lt;ul&gt;
+&lt;li&gt;ideally as varchar(256), not text&lt;/li&gt;
+&lt;li&gt;do not allow them to grow&lt;/li&gt;
+&lt;li&gt;security shall be mostly based on rotation, not purely on length&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Must have access_token_expires_at and refresh_token_expires at columns (both datetime, and keep them as UTC)
+&lt;ul&gt;
+&lt;li&gt;make sure to have these columns calculated during the creation of the session. Do not think of doing &amp;ldquo;time-math&amp;rdquo; for calculating expiry.
+&lt;ul&gt;
+&lt;li&gt;Because, you may login with one server, but the next server you have the auth checked might have a different time stamp/zone&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;access/refresh tokens shall be unique&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;From the above, it becomes possible to have multiple active sessions for one user.
+&lt;ul&gt;
+&lt;li&gt;If that is not desired, restrict that at code level, not at DB level&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Generate random strings for access token and refresh token
+&lt;ul&gt;
+&lt;li&gt;keep them URLsafe (you&amp;rsquo;ll thank me when you have a mobile app)&lt;/li&gt;
+&lt;li&gt;Keep them about 256 char long
+&lt;ul&gt;
+&lt;li&gt;no longer&lt;/li&gt;
+&lt;li&gt;no shorter&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Make access_expiry in a few minutes, and refresh_expiry in a few days&lt;/li&gt;
+&lt;li&gt;Standard auth is having authorisation header
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Authorisation: Bearer &amp;lt;access-token&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Refresh token will require
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Authorisation: Bearer &amp;lt;refresh-token&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Deal with Auth always in a middleware and keep the logged in user, or the session found by looking up the access_token (or refresh_token) in the sessions table&lt;/li&gt;
+&lt;li&gt;On refresh, delete the current session object, and create a new one with new
+&lt;ul&gt;
+&lt;li&gt;access_token, and new expiry in a few minutes&lt;/li&gt;
+&lt;li&gt;refresh_token, with new expiry in a few days&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Disallow refresh if the refresh token is already expired&lt;/li&gt;
+&lt;li&gt;So, if a user logs in and is inactive for a few days, the refresh token expires, and they will have to login fresh again&lt;/li&gt;
+&lt;li&gt;But as long as the user does a &amp;ldquo;refresh&amp;rdquo; before the refresh-token is expired, they will have sessions alive always.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 </description>
       
     </item>

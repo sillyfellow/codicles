@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>git on Code Chronicles (mostly)</title>
+    <title>Git on Code Chronicles (mostly)</title>
     <link>https://codicles.org/tags/git/</link>
-    <description>Recent content in git on Code Chronicles (mostly)</description>
+    <description>Recent content in Git on Code Chronicles (mostly)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</managingEditor>
-    <webMaster>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</webMaster>
     <lastBuildDate>Wed, 26 Oct 2022 00:00:00 +0200</lastBuildDate><atom:link href="https://codicles.org/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Git pain optimisation</title>
       <link>https://codicles.org/post/git-pain-optimisation/</link>
       <pubDate>Wed, 26 Oct 2022 00:00:00 +0200</pubDate>
-      <author>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</author>
+      
       <guid>https://codicles.org/post/git-pain-optimisation/</guid>
       
       <description>&lt;p&gt;I have been thinking a bit about git and the tools that help us with

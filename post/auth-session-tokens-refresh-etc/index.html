@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="">
+
+  
+  
+  <meta name="description" content="
+Do not use JWT (Just DON&rsquo;T)
+Always have a sessions table
+
+Which belongs to the USER
+
+i.e., sessions table has a user_id column
+
+
+Have access_token and refresh_token
+
+ideally as varchar(256), not text
+do not allow them to grow
+security shall be mostly based on rotation, not purely on length
+
+
+Must have access_token_expires_at and refresh_token_expires at columns (both datetime, and keep them as UTC)
+
+make sure to have these columns calculated during the creation of the session. Do not think of doing &ldquo;time-math&rdquo; for calculating expiry.
+
+Because, you may login with one server, but the next server you have the auth checked might have a different time stamp/zone
+
+
+
+
+access/refresh tokens shall be unique
+
+
+From the above, it becomes possible to have multiple active sessions for one user.
+
+If that is not desired, restrict that at code level, not at DB level
+
+
+Generate random strings for access token and refresh token
+
+keep them URLsafe (you&rsquo;ll thank me when you have a mobile app)
+Keep them about 256 char long
+
+no longer
+no shorter
+
+
+
+
+Make access_expiry in a few minutes, and refresh_expiry in a few days
+Standard auth is having authorisation header
+
+Authorisation: Bearer &lt;access-token&gt;
+
+
+Refresh token will require
+
+Authorisation: Bearer &lt;refresh-token&gt;
+
+
+Deal with Auth always in a middleware and keep the logged in user, or the session found by looking up the access_token (or refresh_token) in the sessions table
+On refresh, delete the current session object, and create a new one with new
+
+access_token, and new expiry in a few minutes
+refresh_token, with new expiry in a few days
+
+
+Disallow refresh if the refresh token is already expired
+So, if a user logs in and is inactive for a few days, the refresh token expires, and they will have to login fresh again
+But as long as the user does a &ldquo;refresh&rdquo; before the refresh-token is expired, they will have sessions alive always.
+">
+  
+
+  
+  <link rel="icon" href="https://codicles.org/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" Chronicles  emacs  programming  code ">
+  
+
+  
+  
+
+  
+  <meta property="og:url" content="https://codicles.org/post/auth-session-tokens-refresh-etc/">
+  <meta property="og:site_name" content="Code Chronicles (mostly)">
+  <meta property="og:title" content="Refresh token (access token)">
+  <meta property="og:description" content="Do not use JWT (Just DON’T) Always have a sessions table Which belongs to the USER i.e., sessions table has a user_id column Have access_token and refresh_token ideally as varchar(256), not text do not allow them to grow security shall be mostly based on rotation, not purely on length Must have access_token_expires_at and refresh_token_expires at columns (both datetime, and keep them as UTC) make sure to have these columns calculated during the creation of the session. Do not think of doing “time-math” for calculating expiry. Because, you may login with one server, but the next server you have the auth checked might have a different time stamp/zone access/refresh tokens shall be unique From the above, it becomes possible to have multiple active sessions for one user. If that is not desired, restrict that at code level, not at DB level Generate random strings for access token and refresh token keep them URLsafe (you’ll thank me when you have a mobile app) Keep them about 256 char long no longer no shorter Make access_expiry in a few minutes, and refresh_expiry in a few days Standard auth is having authorisation header Authorisation: Bearer &lt;access-token&gt; Refresh token will require Authorisation: Bearer &lt;refresh-token&gt; Deal with Auth always in a middleware and keep the logged in user, or the session found by looking up the access_token (or refresh_token) in the sessions table On refresh, delete the current session object, and create a new one with new access_token, and new expiry in a few minutes refresh_token, with new expiry in a few days Disallow refresh if the refresh token is already expired So, if a user logs in and is inactive for a few days, the refresh token expires, and they will have to login fresh again But as long as the user does a “refresh” before the refresh-token is expired, they will have sessions alive always.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-12-01T16:24:03+01:00">
+    <meta property="article:modified_time" content="2023-12-01T16:24:03+01:00">
+
+
+  
+  <link rel="canonical" href="https://codicles.org/post/auth-session-tokens-refresh-etc/">
+
+  
+  
+  
+  <meta itemprop="name" content="Refresh token (access token)">
+  <meta itemprop="description" content="Do not use JWT (Just DON’T) Always have a sessions table Which belongs to the USER i.e., sessions table has a user_id column Have access_token and refresh_token ideally as varchar(256), not text do not allow them to grow security shall be mostly based on rotation, not purely on length Must have access_token_expires_at and refresh_token_expires at columns (both datetime, and keep them as UTC) make sure to have these columns calculated during the creation of the session. Do not think of doing “time-math” for calculating expiry. Because, you may login with one server, but the next server you have the auth checked might have a different time stamp/zone access/refresh tokens shall be unique From the above, it becomes possible to have multiple active sessions for one user. If that is not desired, restrict that at code level, not at DB level Generate random strings for access token and refresh token keep them URLsafe (you’ll thank me when you have a mobile app) Keep them about 256 char long no longer no shorter Make access_expiry in a few minutes, and refresh_expiry in a few days Standard auth is having authorisation header Authorisation: Bearer &lt;access-token&gt; Refresh token will require Authorisation: Bearer &lt;refresh-token&gt; Deal with Auth always in a middleware and keep the logged in user, or the session found by looking up the access_token (or refresh_token) in the sessions table On refresh, delete the current session object, and create a new one with new access_token, and new expiry in a few minutes refresh_token, with new expiry in a few days Disallow refresh if the refresh token is already expired So, if a user logs in and is inactive for a few days, the refresh token expires, and they will have to login fresh again But as long as the user does a “refresh” before the refresh-token is expired, they will have sessions alive always.">
+  <meta itemprop="datePublished" content="2023-12-01T16:24:03+01:00">
+  <meta itemprop="dateModified" content="2023-12-01T16:24:03+01:00">
+  <meta itemprop="wordCount" content="311">
+
+  
+  <link media="screen" rel="stylesheet" href='https://codicles.org/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://codicles.org/css/content.css'>
+
+  
+  
+  <title>Refresh token (access token) - Code Chronicles (mostly)</title>
+  
+
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Refresh token (access token)">
+  <meta name="twitter:description" content="Do not use JWT (Just DON’T) Always have a sessions table Which belongs to the USER i.e., sessions table has a user_id column Have access_token and refresh_token ideally as varchar(256), not text do not allow them to grow security shall be mostly based on rotation, not purely on length Must have access_token_expires_at and refresh_token_expires at columns (both datetime, and keep them as UTC) make sure to have these columns calculated during the creation of the session. Do not think of doing “time-math” for calculating expiry. Because, you may login with one server, but the next server you have the auth checked might have a different time stamp/zone access/refresh tokens shall be unique From the above, it becomes possible to have multiple active sessions for one user. If that is not desired, restrict that at code level, not at DB level Generate random strings for access token and refresh token keep them URLsafe (you’ll thank me when you have a mobile app) Keep them about 256 char long no longer no shorter Make access_expiry in a few minutes, and refresh_expiry in a few days Standard auth is having authorisation header Authorisation: Bearer &lt;access-token&gt; Refresh token will require Authorisation: Bearer &lt;refresh-token&gt; Deal with Auth always in a middleware and keep the logged in user, or the session found by looking up the access_token (or refresh_token) in the sessions table On refresh, delete the current session object, and create a new one with new access_token, and new expiry in a few minutes refresh_token, with new expiry in a few days Disallow refresh if the refresh token is already expired So, if a user logs in and is inactive for a few days, the refresh token expires, and they will have to login fresh again But as long as the user does a “refresh” before the refresh-token is expired, they will have sessions alive always.">
+
+
+  
+<link rel="stylesheet" href='https://codicles.org/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://codicles.org/">Code Chronicles (mostly)</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">Home</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">Archives</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">About</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>Refresh token (access token)</h1>
+  
+  
+  <article class="content">
+    
+    <ul>
+<li>Do not use JWT (Just DON&rsquo;T)</li>
+<li>Always have a sessions table
+<ul>
+<li>Which belongs to the USER
+<ul>
+<li>i.e., sessions table has a user_id column</li>
+</ul>
+</li>
+<li>Have access_token and refresh_token
+<ul>
+<li>ideally as varchar(256), not text</li>
+<li>do not allow them to grow</li>
+<li>security shall be mostly based on rotation, not purely on length</li>
+</ul>
+</li>
+<li>Must have access_token_expires_at and refresh_token_expires at columns (both datetime, and keep them as UTC)
+<ul>
+<li>make sure to have these columns calculated during the creation of the session. Do not think of doing &ldquo;time-math&rdquo; for calculating expiry.
+<ul>
+<li>Because, you may login with one server, but the next server you have the auth checked might have a different time stamp/zone</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>access/refresh tokens shall be unique</li>
+</ul>
+</li>
+<li>From the above, it becomes possible to have multiple active sessions for one user.
+<ul>
+<li>If that is not desired, restrict that at code level, not at DB level</li>
+</ul>
+</li>
+<li>Generate random strings for access token and refresh token
+<ul>
+<li>keep them URLsafe (you&rsquo;ll thank me when you have a mobile app)</li>
+<li>Keep them about 256 char long
+<ul>
+<li>no longer</li>
+<li>no shorter</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Make access_expiry in a few minutes, and refresh_expiry in a few days</li>
+<li>Standard auth is having authorisation header
+<ul>
+<li><code>Authorisation: Bearer &lt;access-token&gt;</code></li>
+</ul>
+</li>
+<li>Refresh token will require
+<ul>
+<li><code>Authorisation: Bearer &lt;refresh-token&gt;</code></li>
+</ul>
+</li>
+<li>Deal with Auth always in a middleware and keep the logged in user, or the session found by looking up the access_token (or refresh_token) in the sessions table</li>
+<li>On refresh, delete the current session object, and create a new one with new
+<ul>
+<li>access_token, and new expiry in a few minutes</li>
+<li>refresh_token, with new expiry in a few days</li>
+</ul>
+</li>
+<li>Disallow refresh if the refresh token is already expired</li>
+<li>So, if a user logs in and is inactive for a few days, the refresh token expires, and they will have to login fresh again</li>
+<li>But as long as the user does a &ldquo;refresh&rdquo; before the refresh-token is expired, they will have sessions alive always.</li>
+</ul>
+
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="https://codicles.org/post/kb/">← prev</a>
+    
+    
+    <a class="link" href="https://codicles.org/post/helloworld/">next →</a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span>© 2019</span> - <span>2025</span>
+  </div>
+
+  <div>
+    <span>Powered by </span>
+    <a class="link" href="https://gohugo.io/">Hugo</a>
+    <span> 🍦 Theme </span>
+    <a class="link" href="https://github.com/queensferryme/hugo-theme-texify">TeXify</a>
+  </div>
+
+  <div class="footnote">
+    <span>        Follow me on <a class=link href=https://github.com/sillyfellow>GitHub</a>,
+        <a class=link href=https://twitter.com/sadanandeep>Twitter</a> or
+        <a class=link href=/index.xml>RSS</a> |
+        <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener>CC BY-NC-SA 4.0</a>
+        </span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+  <link media="screen" rel="stylesheet" href="https://codicles.org/css/custom.css" />
+  
+
+  
+  
+  <script src="https://codicles.org/js/custom.js"></script>
+  
+
+</body>
+
+</html>

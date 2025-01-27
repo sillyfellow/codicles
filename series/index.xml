@@ -5,8 +5,6 @@
     <link>https://codicles.org/series/</link>
     <description>Recent content in Series on Code Chronicles (mostly)</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <managingEditor>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</managingEditor>
-    <webMaster>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</webMaster><atom:link href="https://codicles.org/series/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://codicles.org/series/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

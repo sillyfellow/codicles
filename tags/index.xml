@@ -6,14 +6,12 @@
     <description>Recent content in Tags on Code Chronicles (mostly)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</managingEditor>
-    <webMaster>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</webMaster>
-    <lastBuildDate>Sun, 06 Aug 2023 00:00:00 +0200</lastBuildDate><atom:link href="https://codicles.org/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 26 Oct 2022 00:00:00 +0200</lastBuildDate><atom:link href="https://codicles.org/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>code</title>
+      <title>Code</title>
       <link>https://codicles.org/tags/code/</link>
-      <pubDate>Sun, 06 Aug 2023 00:00:00 +0200</pubDate>
-      <author>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</author>
+      <pubDate>Wed, 26 Oct 2022 00:00:00 +0200</pubDate>
+      
       <guid>https://codicles.org/tags/code/</guid>
       
       <description></description>
@@ -21,21 +19,10 @@
     </item>
     
     <item>
-      <title>work</title>
-      <link>https://codicles.org/tags/work/</link>
-      <pubDate>Sun, 06 Aug 2023 00:00:00 +0200</pubDate>
-      <author>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</author>
-      <guid>https://codicles.org/tags/work/</guid>
-      
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>git</title>
+      <title>Git</title>
       <link>https://codicles.org/tags/git/</link>
       <pubDate>Wed, 26 Oct 2022 00:00:00 +0200</pubDate>
-      <author>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</author>
+      
       <guid>https://codicles.org/tags/git/</guid>
       
       <description></description>
@@ -43,10 +30,10 @@
     </item>
     
     <item>
-      <title>emacs</title>
+      <title>Emacs</title>
       <link>https://codicles.org/tags/emacs/</link>
       <pubDate>Sun, 02 Oct 2022 00:00:00 +0200</pubDate>
-      <author>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</author>
+      
       <guid>https://codicles.org/tags/emacs/</guid>
       
       <description></description>

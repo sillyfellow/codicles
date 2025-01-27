@@ -2,13 +2,13 @@
 <html lang="en-us">
 
 <head>
-	<meta name="generator" content="Hugo 0.113.0">
+	<meta name="generator" content="Hugo 0.139.5">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   
-  <meta name="author" content="Dr. Sandeep Sadanandan">
+  <meta name="author" content="">
 
   
   
@@ -27,10 +27,12 @@
   
 
   
-  <meta property="og:title" content="Code Chronicles (mostly)" />
-<meta property="og:description" content="Tiny little things from life" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://codicles.org/" />
+  <meta property="og:url" content="https://codicles.org/">
+  <meta property="og:site_name" content="Code Chronicles (mostly)">
+  <meta property="og:title" content="Code Chronicles (mostly)">
+  <meta property="og:description" content="Tiny little things from life">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
 
 
   
@@ -40,8 +42,11 @@
   
   <link rel="alternate" type="application/rss+xml" href="https://codicles.org/index.xml" title="Code Chronicles (mostly)" />
   
+  
   <meta itemprop="name" content="Code Chronicles (mostly)">
-<meta itemprop="description" content="Tiny little things from life">
+  <meta itemprop="description" content="Tiny little things from life">
+  <meta itemprop="datePublished" content="2025-01-27T00:00:00+01:00">
+  <meta itemprop="dateModified" content="2025-01-27T22:25:48+01:00">
 
   
   <link media="screen" rel="stylesheet" href='https://codicles.org/css/common.css'>
@@ -53,9 +58,10 @@
   
 
   
-  <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Code Chronicles (mostly)"/>
-<meta name="twitter:description" content="Tiny little things from life"/>
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Code Chronicles (mostly)">
+  <meta name="twitter:description" content="Tiny little things from life">
 
 
   
@@ -67,7 +73,7 @@
   <div id="wrapper">
     <header id="header">
   <h1>
-    <a href="https://codicles.org">Code Chronicles (mostly)</a>
+    <a href="https://codicles.org/">Code Chronicles (mostly)</a>
   </h1>
 
   <nav>
@@ -93,23 +99,14 @@
   
   <div class="post">
     <h2>
-      <a href="https://codicles.org/post/server-requirements/">Server requirements</a>
-      <time>August 06, 2023</time>
+      <a href="https://codicles.org/post/test-entry/">Test entry</a>
+      <time>January 27, 2025</time>
     </h2>
-    
-    <div>
-      <b>Keywords: </b>
-      
-      <a class="link" href='https://codicles.org/tags/code'>#code</a>
-      
-      <a class="link" href='https://codicles.org/tags/work'>#work</a>
-      
-    </div>
     
     <div class="content">
       
-      Every now and then I have to create a new server. Sometimes in Python, sometimes in Javascript (lately more Typescript), sometimes it is Go. Rarely Rails (at least lately). Over time, the following are my self-inflicted requirements for a nice server. Just putting it out here for future reference. Also, I might just create a series about creating such a server (perhaps in Golang?)
-Database connection/s of course at least one type should be configured.
+      <p>Everything is a test</p>
+<p>&ndash; sillyfellow @ <span class="timestamp-wrapper"><span class="timestamp">[2025-01-27 Mon 22:23]</span></span></p>
       
     </div>
   </div>
@@ -131,10 +128,15 @@ Database connection/s of course at least one type should be configured.
     
     <div class="content">
       
-      I have been thinking a bit about git and the tools that help us with it.
-Git is a super powerful tool, but with quite complicated ways of working.
-And to most of the developers, the interface in the command line is hard.
-That usually leads them to using some UI which claims to make things easier by abstracting details away (that is, the UI claims to do the magic).
+      <p>I have been thinking a bit about git and the tools that help us with
+it.</p>
+<p>Git is a super powerful tool, but with quite complicated ways of
+working.</p>
+<p>And to most of the developers, the interface in the command line is
+hard.</p>
+<p>That usually leads them to using some UI which claims to make things
+easier by abstracting details away (that is, the UI claims to do
+the magic).</p>
       
     </div>
   </div>
@@ -156,10 +158,10 @@ That usually leads them to using some UI which claims to make things easier by a
     
     <div class="content">
       
-      I blog directly from Emacs (Org mode), using hugo-markdown export, and easy hugo.
-Org mode capture allows me to directly write to my entries.org file, which I then export the usual way (C-c C-e), but into the markdown file in the posts folder in my hugo website.
-And with easy-hugo, I just publish it. That&rsquo;s it :)
-What I shall not forget is giving a proper name in the entries.org so that all is kept in order.
+      <p>I blog directly from Emacs (Org mode), using hugo-markdown export, and easy hugo.</p>
+<p>Org mode capture allows me to directly write to my <code>entries.org</code> file, which I then export the usual way (C-c C-e), but into the markdown file in the posts folder in my hugo website.</p>
+<p>And with easy-hugo, I just publish it. That&rsquo;s it :)</p>
+<p>What I shall not forget is giving a proper name in the <code>entries.org</code> so that all is kept in order.</p>
       
     </div>
   </div>
@@ -179,7 +181,120 @@ What I shall not forget is giving a proper name in the entries.org so that all i
     
     <div class="content">
       
-      #include &lt;stdio.h&gt; int main() { printf(&#34;Hello World!\n&#34;); return 0; } &ndash; sillyfellow @ [2022-01-03 Mon 09:14]
+      <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#080">#include</span> <span style="color:#080">&lt;stdio.h&gt;</span><span style="color:#080">
+</span></span></span><span style="display:flex;"><span><span style="color:#080"></span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">main</span>() {
+</span></span><span style="display:flex;"><span>   <span style="color:#00a000">printf</span>(<span style="color:#b44">&#34;Hello World!</span><span style="color:#b62;font-weight:bold">\n</span><span style="color:#b44">&#34;</span>);
+</span></span><span style="display:flex;"><span>   <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>&ndash; sillyfellow @ <span class="timestamp-wrapper"><span class="timestamp">[2022-01-03 Mon 09:14]</span></span></p>
+      
+    </div>
+  </div>
+  
+  <div class="post">
+    <h2>
+      <a href="https://codicles.org/post/auth-session-tokens-refresh-etc/">Refresh token (access token)</a>
+      <time>December 01, 2023</time>
+    </h2>
+    
+    <div class="content">
+      
+      <ul>
+<li>Do not use JWT (Just DON&rsquo;T)</li>
+<li>Always have a sessions table
+<ul>
+<li>Which belongs to the USER
+<ul>
+<li>i.e., sessions table has a user_id column</li>
+</ul>
+</li>
+<li>Have access_token and refresh_token
+<ul>
+<li>ideally as varchar(256), not text</li>
+<li>do not allow them to grow</li>
+<li>security shall be mostly based on rotation, not purely on length</li>
+</ul>
+</li>
+<li>Must have access_token_expires_at and refresh_token_expires at columns (both datetime, and keep them as UTC)
+<ul>
+<li>make sure to have these columns calculated during the creation of the session. Do not think of doing &ldquo;time-math&rdquo; for calculating expiry.
+<ul>
+<li>Because, you may login with one server, but the next server you have the auth checked might have a different time stamp/zone</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>access/refresh tokens shall be unique</li>
+</ul>
+</li>
+<li>From the above, it becomes possible to have multiple active sessions for one user.
+<ul>
+<li>If that is not desired, restrict that at code level, not at DB level</li>
+</ul>
+</li>
+<li>Generate random strings for access token and refresh token
+<ul>
+<li>keep them URLsafe (you&rsquo;ll thank me when you have a mobile app)</li>
+<li>Keep them about 256 char long
+<ul>
+<li>no longer</li>
+<li>no shorter</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Make access_expiry in a few minutes, and refresh_expiry in a few days</li>
+<li>Standard auth is having authorisation header
+<ul>
+<li><code>Authorisation: Bearer &lt;access-token&gt;</code></li>
+</ul>
+</li>
+<li>Refresh token will require
+<ul>
+<li><code>Authorisation: Bearer &lt;refresh-token&gt;</code></li>
+</ul>
+</li>
+<li>Deal with Auth always in a middleware and keep the logged in user, or the session found by looking up the access_token (or refresh_token) in the sessions table</li>
+<li>On refresh, delete the current session object, and create a new one with new
+<ul>
+<li>access_token, and new expiry in a few minutes</li>
+<li>refresh_token, with new expiry in a few days</li>
+</ul>
+</li>
+<li>Disallow refresh if the refresh token is already expired</li>
+<li>So, if a user logs in and is inactive for a few days, the refresh token expires, and they will have to login fresh again</li>
+<li>But as long as the user does a &ldquo;refresh&rdquo; before the refresh-token is expired, they will have sessions alive always.</li>
+</ul>
+      
+    </div>
+  </div>
+  
+  <div class="post">
+    <h2>
+      <a href="https://codicles.org/post/kb/"></a>
+      <time>December 01, 2023</time>
+    </h2>
+    
+    <div class="content">
+      
+      <h2 id="2023">2023</h2>
+<h3 id="2023-08-august">2023-08 August</h3>
+<h4 id="2023-08-21-monday">2023-08-21 Monday</h4>
+<!--list-separator-->
+<ul>
+<li>
+<p>PlantUML and GraphViz (DOT)</p>
+ <!--list-separator-->
+<ul>
+<li>
+<p>PlantUML</p>
+<p>It is a tool (Java library/package) that helps one to create UML diagrams with ease.</p>
+<p>For the full details of it, one should look at <a href="https://plantuml.com/">https://plantuml.com/</a>.</p>
+<p>The basic idea is that you write the diagram you need in plain text, and then using java + plantuml.jar (downloaded from the website above), generate a nice diagram.</p>
+<p>Your steps</p>
+<ol>
+<li>
+<p>Setup java on your machine</p>
       
     </div>
   </div>
@@ -189,7 +304,7 @@ What I shall not forget is giving a proper name in the entries.org so that all i
 
     <footer id="footer">
   <div>
-    <span>© 2019</span> - <span>2023</span>
+    <span>© 2019</span> - <span>2025</span>
   </div>
 
   <div>
@@ -218,9 +333,6 @@ What I shall not forget is giving a proper name in the entries.org so that all i
   
   
   <script src="https://codicles.org/js/custom.js"></script>
-  
-
-  
   
 
 </body>

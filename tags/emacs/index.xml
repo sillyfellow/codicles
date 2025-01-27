@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>emacs on Code Chronicles (mostly)</title>
+    <title>Emacs on Code Chronicles (mostly)</title>
     <link>https://codicles.org/tags/emacs/</link>
-    <description>Recent content in emacs on Code Chronicles (mostly)</description>
+    <description>Recent content in Emacs on Code Chronicles (mostly)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <managingEditor>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</managingEditor>
-    <webMaster>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</webMaster>
     <lastBuildDate>Sun, 02 Oct 2022 00:00:00 +0200</lastBuildDate><atom:link href="https://codicles.org/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How do I blog?</title>
       <link>https://codicles.org/post/blogging-howto/</link>
       <pubDate>Sun, 02 Oct 2022 00:00:00 +0200</pubDate>
-      <author>sillyfellow@whybenormal.org (Dr. Sandeep Sadanandan)</author>
+      
       <guid>https://codicles.org/post/blogging-howto/</guid>
       
       <description>&lt;p&gt;I blog directly from Emacs (Org mode), using hugo-markdown export, and easy hugo.&lt;/p&gt;
