@@ -364,14 +364,14 @@ pain minimal.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Setup a new server (Hetzner, EC2, etc.)</title>
-      <link>https://codicles.org/post/server-setup/</link>
+      <title>Setup auto deployment from Private Github repo to EC2 instance</title>
+      <link>https://codicles.org/post/gh-private-to-aws-ect/</link>
       <pubDate>Thu, 10 Feb 2022 00:00:00 +0100</pubDate>
       
-      <guid>https://codicles.org/post/server-setup/</guid>
+      <guid>https://codicles.org/post/gh-private-to-aws-ect/</guid>
       
       <description>&lt;p&gt;TODO&lt;/p&gt;
-&lt;p&gt;&amp;ndash; sillyfellow @ &lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;[2022-02-10 Thu 00:16]&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;ndash; sillyfellow @ &lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;[2022-02-10 Thu 00:17]&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
 </description>
       
     </item>
@@ -412,96 +412,6 @@ pain minimal.&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        message &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#b44&#34;&gt;&amp;#34;Expected environment variable &amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#b68;font-weight:bold&#34;&gt;{}&lt;/span&gt;&lt;span style=&#34;color:#b44&#34;&gt;&amp;#39; not set.&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;format(name)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#a2f;font-weight:bold&#34;&gt;raise&lt;/span&gt; &lt;span style=&#34;color:#d2413a;font-weight:bold&#34;&gt;Exception&lt;/span&gt;(message)
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&amp;ndash; sillyfellow @ &lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;[2021-12-27 Mon 15:28]&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
-</description>
-      
-    </item>
-    
-    <item>
-      <title>Setup auto deployment from Private Github repo to EC2 instance</title>
-      <link>https://codicles.org/post/gh-private-to-aws-ect/</link>
-      <pubDate>Thu, 10 Feb 2022 00:00:00 +0100</pubDate>
-      
-      <guid>https://codicles.org/post/gh-private-to-aws-ect/</guid>
-      
-      <description>&lt;p&gt;TODO&lt;/p&gt;
-&lt;p&gt;&amp;ndash; sillyfellow @ &lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;[2022-02-10 Thu 00:17]&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
-</description>
-      
-    </item>
-    
-    <item>
-      <title>Refresh token (access token)</title>
-      <link>https://codicles.org/post/auth-session-tokens-refresh-etc/</link>
-      <pubDate>Fri, 01 Dec 2023 16:24:03 +0100</pubDate>
-      
-      <guid>https://codicles.org/post/auth-session-tokens-refresh-etc/</guid>
-      
-      <description>&lt;ul&gt;
-&lt;li&gt;Do not use JWT (Just DON&amp;rsquo;T)&lt;/li&gt;
-&lt;li&gt;Always have a sessions table
-&lt;ul&gt;
-&lt;li&gt;Which belongs to the USER
-&lt;ul&gt;
-&lt;li&gt;i.e., sessions table has a user_id column&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Have access_token and refresh_token
-&lt;ul&gt;
-&lt;li&gt;ideally as varchar(256), not text&lt;/li&gt;
-&lt;li&gt;do not allow them to grow&lt;/li&gt;
-&lt;li&gt;security shall be mostly based on rotation, not purely on length&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Must have access_token_expires_at and refresh_token_expires at columns (both datetime, and keep them as UTC)
-&lt;ul&gt;
-&lt;li&gt;make sure to have these columns calculated during the creation of the session. Do not think of doing &amp;ldquo;time-math&amp;rdquo; for calculating expiry.
-&lt;ul&gt;
-&lt;li&gt;Because, you may login with one server, but the next server you have the auth checked might have a different time stamp/zone&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;access/refresh tokens shall be unique&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;From the above, it becomes possible to have multiple active sessions for one user.
-&lt;ul&gt;
-&lt;li&gt;If that is not desired, restrict that at code level, not at DB level&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Generate random strings for access token and refresh token
-&lt;ul&gt;
-&lt;li&gt;keep them URLsafe (you&amp;rsquo;ll thank me when you have a mobile app)&lt;/li&gt;
-&lt;li&gt;Keep them about 256 char long
-&lt;ul&gt;
-&lt;li&gt;no longer&lt;/li&gt;
-&lt;li&gt;no shorter&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Make access_expiry in a few minutes, and refresh_expiry in a few days&lt;/li&gt;
-&lt;li&gt;Standard auth is having authorisation header
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Authorisation: Bearer &amp;lt;access-token&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Refresh token will require
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Authorisation: Bearer &amp;lt;refresh-token&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Deal with Auth always in a middleware and keep the logged in user, or the session found by looking up the access_token (or refresh_token) in the sessions table&lt;/li&gt;
-&lt;li&gt;On refresh, delete the current session object, and create a new one with new
-&lt;ul&gt;
-&lt;li&gt;access_token, and new expiry in a few minutes&lt;/li&gt;
-&lt;li&gt;refresh_token, with new expiry in a few days&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Disallow refresh if the refresh token is already expired&lt;/li&gt;
-&lt;li&gt;So, if a user logs in and is inactive for a few days, the refresh token expires, and they will have to login fresh again&lt;/li&gt;
-&lt;li&gt;But as long as the user does a &amp;ldquo;refresh&amp;rdquo; before the refresh-token is expired, they will have sessions alive always.&lt;/li&gt;
-&lt;/ul&gt;
 </description>
       
     </item>
