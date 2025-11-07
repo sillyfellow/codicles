@@ -7,12 +7,131 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   
-  <meta name="author" content="Dr. Sandeep Sadanandan">
+  <meta name="author" content="">
 
   
   
   <meta name="description" content="Every now and then I have to create a new server. Sometimes in Python, sometimes in Javascript (lately more Typescript), sometimes it is Go. Rarely Rails (at least lately). Over time, the following are my self-inflicted requirements for a nice server. Just putting it out here for future reference. Also, I might just create a series about creating such a server (perhaps in Golang?)
-Database connection/s of course at least one type should be configured.">
+
+Database connection/s
+
+of course at least one type should be configured.
+but possibly with choice of environments - develop on psql, testing on sqlite (for example)
+
+I&rsquo;ve found it quite nice to have local tests that can be run on against an in-memory sqlite DB
+
+
+
+
+Migration (either automatic on start, or with a simple trigger)
+
+CRUD for entities, and similar things
+NOTE that this might get tricky with ability to run against different DBs.
+
+In conflict, I think we stick with the DB of our choice and migrations win
+
+
+
+
+/health endpoint
+
+Should return something like { status: &quot;Ok&quot;, db_ping: &quot;43ns&quot;, version: &quot;x.yy.zzz&quot; }
+The DB ping is quite useful at times (if you ping takes longer, you can directly see there&rsquo;s a bit of load there)
+
+
+NO global variables (must I explain?)
+NOTHING hardcoded
+
+Env variables are to be read only in the main (entry method)
+And proper dependency injection
+
+
+Swagger generated with annotations, not with a large yaml/json file
+
+Would love if it is a smart/er system which generates from code itself ;)
+
+
+One method createServer(params) should return
+
+a server we can run, and
+a shutDownServer which will gracefully shut things down
+
+(optional) proper disconnection from DB as well
+And to be called when we receive signals to die/kill
+
+
+
+
+Middle/After-ware which logs
+
+Request arrival
+
+possibility to turn on body/header logging
+
+
+Request completion with time taken
+
+possibility to turn on output logging
+
+
+The possibility to add an arbitrary middleware
+
+For example, something to add a dummy-header to the request.
+
+
+
+
+Unit tests
+
+Anything which is NOT an api call should be testable with unit tests
+
+(optional) If possible the migration method should be tested too
+
+
+
+
+Integration/API tests
+
+All apis should be testable (/health included)
+
+Test the response code, and verify with another call, but not by looking into DB.
+
+
+Create database at start
+Connect to database (in memory is fine too)
+NO tests shall call endpoints directly with path.
+
+They shall be called as methods of server, or server like object.
+
+
+On test completion, shutdown the server, disconnect the database
+
+a nice teardown (though our db might be in memory or temporary file)
+
+
+
+
+Internationalisation / Localisation
+
+The request shall be able to send `Accepted-Language` header, and the response must respect it.
+Should have some kind of localised strings file.
+
+
+Project shall be
+
+structured to
+
+entry-point.&lt;java|ts|go|js|py&gt;, (say main)
+and folders like routes/, models/, controllers/, repository/ (business logic), and /services
+
+
+with rather limited package dependency
+compile/runnable and testable with simple commands, small script, etc.
+
+
+Basic auth endpoints, sessions, tokens, etc. without JWT (I personally dislike JWT)
+
+&ndash; sillyfellow on 2023-08-06 (Sun 22:47)">
   
 
   
@@ -27,13 +146,17 @@ Database connection/s of course at least one type should be configured.">
   
 
   
-  <meta property="og:title" content="Server requirements" />
-<meta property="og:description" content="Every now and then I have to create a new server. Sometimes in Python, sometimes in Javascript (lately more Typescript), sometimes it is Go. Rarely Rails (at least lately). Over time, the following are my self-inflicted requirements for a nice server. Just putting it out here for future reference. Also, I might just create a series about creating such a server (perhaps in Golang?)
-Database connection/s of course at least one type should be configured." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://codicles.org/post/server-requirements/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2023-08-06T00:00:00+02:00" />
-<meta property="article:modified_time" content="2023-08-06T22:53:11+02:00" />
+  <meta property="og:url" content="https://codicles.org/post/server-requirements/">
+  <meta property="og:site_name" content="Code Chronicles (mostly)">
+  <meta property="og:title" content="Server requirements">
+  <meta property="og:description" content="Every now and then I have to create a new server. Sometimes in Python, sometimes in Javascript (lately more Typescript), sometimes it is Go. Rarely Rails (at least lately). Over time, the following are my self-inflicted requirements for a nice server. Just putting it out here for future reference. Also, I might just create a series about creating such a server (perhaps in Golang?)
+Database connection/s of course at least one type should be configured. but possibly with choice of environments - develop on psql, testing on sqlite (for example) I’ve found it quite nice to have local tests that can be run on against an in-memory sqlite DB Migration (either automatic on start, or with a simple trigger) CRUD for entities, and similar things NOTE that this might get tricky with ability to run against different DBs. In conflict, I think we stick with the DB of our choice and migrations win /health endpoint Should return something like { status: &#34;Ok&#34;, db_ping: &#34;43ns&#34;, version: &#34;x.yy.zzz&#34; } The DB ping is quite useful at times (if you ping takes longer, you can directly see there’s a bit of load there) NO global variables (must I explain?) NOTHING hardcoded Env variables are to be read only in the main (entry method) And proper dependency injection Swagger generated with annotations, not with a large yaml/json file Would love if it is a smart/er system which generates from code itself ;) One method createServer(params) should return a server we can run, and a shutDownServer which will gracefully shut things down (optional) proper disconnection from DB as well And to be called when we receive signals to die/kill Middle/After-ware which logs Request arrival possibility to turn on body/header logging Request completion with time taken possibility to turn on output logging The possibility to add an arbitrary middleware For example, something to add a dummy-header to the request. Unit tests Anything which is NOT an api call should be testable with unit tests (optional) If possible the migration method should be tested too Integration/API tests All apis should be testable (/health included) Test the response code, and verify with another call, but not by looking into DB. Create database at start Connect to database (in memory is fine too) NO tests shall call endpoints directly with path. They shall be called as methods of server, or server like object. On test completion, shutdown the server, disconnect the database a nice teardown (though our db might be in memory or temporary file) Internationalisation / Localisation The request shall be able to send `Accepted-Language` header, and the response must respect it. Should have some kind of localised strings file. Project shall be structured to entry-point.&lt;java|ts|go|js|py&gt;, (say main) and folders like routes/, models/, controllers/, repository/ (business logic), and /services with rather limited package dependency compile/runnable and testable with simple commands, small script, etc. Basic auth endpoints, sessions, tokens, etc. without JWT (I personally dislike JWT) – sillyfellow on 2023-08-06 (Sun 22:47)">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-08-06T00:00:00+02:00">
+    <meta property="article:modified_time" content="2025-11-07T12:17:25+01:00">
+    <meta property="article:tag" content="Code">
 
 
   
@@ -41,12 +164,14 @@ Database connection/s of course at least one type should be configured." />
 
   
   
+  
   <meta itemprop="name" content="Server requirements">
-<meta itemprop="description" content="Every now and then I have to create a new server. Sometimes in Python, sometimes in Javascript (lately more Typescript), sometimes it is Go. Rarely Rails (at least lately). Over time, the following are my self-inflicted requirements for a nice server. Just putting it out here for future reference. Also, I might just create a series about creating such a server (perhaps in Golang?)
-Database connection/s of course at least one type should be configured."><meta itemprop="datePublished" content="2023-08-06T00:00:00+02:00" />
-<meta itemprop="dateModified" content="2023-08-06T22:53:11+02:00" />
-<meta itemprop="wordCount" content="493">
-<meta itemprop="keywords" content="code,work," />
+  <meta itemprop="description" content="Every now and then I have to create a new server. Sometimes in Python, sometimes in Javascript (lately more Typescript), sometimes it is Go. Rarely Rails (at least lately). Over time, the following are my self-inflicted requirements for a nice server. Just putting it out here for future reference. Also, I might just create a series about creating such a server (perhaps in Golang?)
+Database connection/s of course at least one type should be configured. but possibly with choice of environments - develop on psql, testing on sqlite (for example) I’ve found it quite nice to have local tests that can be run on against an in-memory sqlite DB Migration (either automatic on start, or with a simple trigger) CRUD for entities, and similar things NOTE that this might get tricky with ability to run against different DBs. In conflict, I think we stick with the DB of our choice and migrations win /health endpoint Should return something like { status: &#34;Ok&#34;, db_ping: &#34;43ns&#34;, version: &#34;x.yy.zzz&#34; } The DB ping is quite useful at times (if you ping takes longer, you can directly see there’s a bit of load there) NO global variables (must I explain?) NOTHING hardcoded Env variables are to be read only in the main (entry method) And proper dependency injection Swagger generated with annotations, not with a large yaml/json file Would love if it is a smart/er system which generates from code itself ;) One method createServer(params) should return a server we can run, and a shutDownServer which will gracefully shut things down (optional) proper disconnection from DB as well And to be called when we receive signals to die/kill Middle/After-ware which logs Request arrival possibility to turn on body/header logging Request completion with time taken possibility to turn on output logging The possibility to add an arbitrary middleware For example, something to add a dummy-header to the request. Unit tests Anything which is NOT an api call should be testable with unit tests (optional) If possible the migration method should be tested too Integration/API tests All apis should be testable (/health included) Test the response code, and verify with another call, but not by looking into DB. Create database at start Connect to database (in memory is fine too) NO tests shall call endpoints directly with path. They shall be called as methods of server, or server like object. On test completion, shutdown the server, disconnect the database a nice teardown (though our db might be in memory or temporary file) Internationalisation / Localisation The request shall be able to send `Accepted-Language` header, and the response must respect it. Should have some kind of localised strings file. Project shall be structured to entry-point.&lt;java|ts|go|js|py&gt;, (say main) and folders like routes/, models/, controllers/, repository/ (business logic), and /services with rather limited package dependency compile/runnable and testable with simple commands, small script, etc. Basic auth endpoints, sessions, tokens, etc. without JWT (I personally dislike JWT) – sillyfellow on 2023-08-06 (Sun 22:47)">
+  <meta itemprop="datePublished" content="2023-08-06T00:00:00+02:00">
+  <meta itemprop="dateModified" content="2025-11-07T12:17:25+01:00">
+  <meta itemprop="wordCount" content="493">
+  <meta itemprop="keywords" content="Code">
 
   
   <link media="screen" rel="stylesheet" href='https://codicles.org/css/common.css'>
@@ -58,10 +183,11 @@ Database connection/s of course at least one type should be configured."><meta i
   
 
   
-  <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Server requirements"/>
-<meta name="twitter:description" content="Every now and then I have to create a new server. Sometimes in Python, sometimes in Javascript (lately more Typescript), sometimes it is Go. Rarely Rails (at least lately). Over time, the following are my self-inflicted requirements for a nice server. Just putting it out here for future reference. Also, I might just create a series about creating such a server (perhaps in Golang?)
-Database connection/s of course at least one type should be configured."/>
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Server requirements">
+  <meta name="twitter:description" content="Every now and then I have to create a new server. Sometimes in Python, sometimes in Javascript (lately more Typescript), sometimes it is Go. Rarely Rails (at least lately). Over time, the following are my self-inflicted requirements for a nice server. Just putting it out here for future reference. Also, I might just create a series about creating such a server (perhaps in Golang?)
+Database connection/s of course at least one type should be configured. but possibly with choice of environments - develop on psql, testing on sqlite (for example) I’ve found it quite nice to have local tests that can be run on against an in-memory sqlite DB Migration (either automatic on start, or with a simple trigger) CRUD for entities, and similar things NOTE that this might get tricky with ability to run against different DBs. In conflict, I think we stick with the DB of our choice and migrations win /health endpoint Should return something like { status: &#34;Ok&#34;, db_ping: &#34;43ns&#34;, version: &#34;x.yy.zzz&#34; } The DB ping is quite useful at times (if you ping takes longer, you can directly see there’s a bit of load there) NO global variables (must I explain?) NOTHING hardcoded Env variables are to be read only in the main (entry method) And proper dependency injection Swagger generated with annotations, not with a large yaml/json file Would love if it is a smart/er system which generates from code itself ;) One method createServer(params) should return a server we can run, and a shutDownServer which will gracefully shut things down (optional) proper disconnection from DB as well And to be called when we receive signals to die/kill Middle/After-ware which logs Request arrival possibility to turn on body/header logging Request completion with time taken possibility to turn on output logging The possibility to add an arbitrary middleware For example, something to add a dummy-header to the request. Unit tests Anything which is NOT an api call should be testable with unit tests (optional) If possible the migration method should be tested too Integration/API tests All apis should be testable (/health included) Test the response code, and verify with another call, but not by looking into DB. Create database at start Connect to database (in memory is fine too) NO tests shall call endpoints directly with path. They shall be called as methods of server, or server like object. On test completion, shutdown the server, disconnect the database a nice teardown (though our db might be in memory or temporary file) Internationalisation / Localisation The request shall be able to send `Accepted-Language` header, and the response must respect it. Should have some kind of localised strings file. Project shall be structured to entry-point.&lt;java|ts|go|js|py&gt;, (say main) and folders like routes/, models/, controllers/, repository/ (business logic), and /services with rather limited package dependency compile/runnable and testable with simple commands, small script, etc. Basic auth endpoints, sessions, tokens, etc. without JWT (I personally dislike JWT) – sillyfellow on 2023-08-06 (Sun 22:47)">
 
 
   
@@ -73,7 +199,7 @@ Database connection/s of course at least one type should be configured."/>
   <div id="wrapper">
     <header id="header">
   <h1>
-    <a href="https://codicles.org">Code Chronicles (mostly)</a>
+    <a href="https://codicles.org/">Code Chronicles (mostly)</a>
   </h1>
 
   <nav>
@@ -103,8 +229,6 @@ Database connection/s of course at least one type should be configured."/>
     <b>Keywords: </b>
     
     <a class="link" href='https://codicles.org/tags/code'>#code</a>
-    
-    <a class="link" href='https://codicles.org/tags/work'>#work</a>
     
   </div>
   
@@ -240,7 +364,7 @@ Database connection/s of course at least one type should be configured."/>
     <a class="link" href="https://codicles.org/post/git-pain-optimisation/">← prev</a>
     
     
-    <a></a>
+    <a class="link" href="https://codicles.org/post/account-mapping-to-skr-04-with-open-ai-assistant/">next →</a>
     
   </div>
   <div class="comment">
@@ -256,7 +380,7 @@ Database connection/s of course at least one type should be configured."/>
 
     <footer id="footer">
   <div>
-    <span>© 2019</span> - <span>2023</span>
+    <span>© 2019</span> - <span>2025</span>
   </div>
 
   <div>
@@ -285,9 +409,6 @@ Database connection/s of course at least one type should be configured."/>
   
   
   <script src="https://codicles.org/js/custom.js"></script>
-  
-
-  
   
 
 </body>

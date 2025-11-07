@@ -265,32 +265,32 @@ See the example below</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">type</span> MyStruct <span style="color:#a2f;font-weight:bold">struct</span> {
 </span></span><span style="display:flex;"><span>        UpperCase <span style="color:#0b0;font-weight:bold">string</span>
-</span></span><span style="display:flex;"><span>        lowerCase <span style="color:#0b0;font-weight:bold">string</span> <span style="color:#080;font-style:italic">// NOTE: This field is not exported, and will not be in the json
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        secret    <span style="color:#0b0;font-weight:bold">string</span>
+</span></span><span style="display:flex;"><span>        lowerCase <span style="color:#0b0;font-weight:bold">string</span> <span style="color:#080;font-style:italic">// NOTE: This field is not exported, and will not be in the json</span>
+</span></span><span style="display:flex;"><span>        secret    <span style="color:#0b0;font-weight:bold">string</span>
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// createStruct creates a struct with an exported and an unexported field.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">func</span> <span style="color:#00a000">createStruct</span>() <span style="color:#666">*</span>MyStruct {
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// createStruct creates a struct with an exported and an unexported field.</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">func</span> <span style="color:#00a000">createStruct</span>() <span style="color:#666">*</span>MyStruct {
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">&amp;</span>MyStruct{
 </span></span><span style="display:flex;"><span>                UpperCase: <span style="color:#b44">&#34;UPPER&#34;</span>,
 </span></span><span style="display:flex;"><span>                lowerCase: <span style="color:#b44">&#34;lower&#34;</span>,
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// we implement the Marshaler interface for our struct.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// This means that when we call json.Marshal on our struct, this
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// method will be called.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">func</span> (s <span style="color:#666">*</span>MyStruct) <span style="color:#00a000">MarshalJSON</span>() ([]<span style="color:#0b0;font-weight:bold">byte</span>, <span style="color:#0b0;font-weight:bold">error</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// we create a new &#34;marshalable&#34; struct with the fields we want to
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#080;font-style:italic">// export. We do not need to create a new type for this, we can
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#080;font-style:italic">// just use a struct literal.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// we implement the Marshaler interface for our struct.</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// This means that when we call json.Marshal on our struct, this</span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// method will be called.</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">func</span> (s <span style="color:#666">*</span>MyStruct) <span style="color:#00a000">MarshalJSON</span>() ([]<span style="color:#0b0;font-weight:bold">byte</span>, <span style="color:#0b0;font-weight:bold">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// we create a new &#34;marshalable&#34; struct with the fields we want to</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// export. We do not need to create a new type for this, we can</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// just use a struct literal.</span>
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>        marshalable <span style="color:#666">:=</span> <span style="color:#a2f;font-weight:bold">struct</span> {
 </span></span><span style="display:flex;"><span>                UpperCase <span style="color:#0b0;font-weight:bold">string</span> <span style="color:#b44">`json:&#34;upperCase&#34;`</span>
 </span></span><span style="display:flex;"><span>                LowerCase <span style="color:#0b0;font-weight:bold">string</span> <span style="color:#b44">`json:&#34;lower_case&#34;`</span>
 </span></span><span style="display:flex;"><span>        }{
-</span></span><span style="display:flex;"><span>                <span style="color:#080;font-style:italic">// NOTE: The order of the keys is not guaranteed.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                UpperCase: s.UpperCase,
+</span></span><span style="display:flex;"><span>                <span style="color:#080;font-style:italic">// NOTE: The order of the keys is not guaranteed.</span>
+</span></span><span style="display:flex;"><span>                UpperCase: s.UpperCase,
 </span></span><span style="display:flex;"><span>                LowerCase: s.lowerCase,
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>

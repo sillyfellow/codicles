@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  
+  <meta name="author" content="">
+
+  
+  
+  <meta name="description" content="For the uninitiated in accounting, and tax reporting: though it must be absolutely standardised, everyone uses their own accounting &ldquo;standards&rdquo; (at the very least, they use their own accounting descriptions, and numbers)
+And when I say account numbers, it is not bank account numbers I mean. Every/any thing that happens in accouting goes to and comes from one or another account. That&rsquo;s something we&rsquo;ll address another day.
+Coming to the issue at hand: When clients report their accounting to tax consultants (who then must calculate the tax adjusted P&amp;L1 and Balance Sheet), the account numbering is based on the clients internal system.">
+  
+
+  
+  <link rel="icon" href="https://codicles.org/favicon.ico">
+
+  
+  
+  <meta name="keywords" content=" Chronicles  emacs  programming  code ">
+  
+
+  
+  
+
+  
+  <meta property="og:url" content="https://codicles.org/post/account-mapping-to-skr-04-with-open-ai-assistant/">
+  <meta property="og:site_name" content="Code Chronicles (mostly)">
+  <meta property="og:title" content="Account Mapping to SKR04 with OpenAI Assistant">
+  <meta property="og:description" content="For the uninitiated in accounting, and tax reporting: though it must be absolutely standardised, everyone uses their own accounting “standards” (at the very least, they use their own accounting descriptions, and numbers)
+And when I say account numbers, it is not bank account numbers I mean. Every/any thing that happens in accouting goes to and comes from one or another account. That’s something we’ll address another day.
+Coming to the issue at hand: When clients report their accounting to tax consultants (who then must calculate the tax adjusted P&amp;L1 and Balance Sheet), the account numbering is based on the clients internal system.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-01-27T00:00:00+01:00">
+    <meta property="article:modified_time" content="2025-11-07T12:17:25+01:00">
+    <meta property="article:tag" content="Kotaicode">
+    <meta property="article:tag" content="Code">
+    <meta property="article:tag" content="Tax">
+    <meta property="article:tag" content="Ai">
+
+
+  
+  <link rel="canonical" href="https://codicles.org/post/account-mapping-to-skr-04-with-open-ai-assistant/">
+
+  
+  
+  
+  <meta itemprop="name" content="Account Mapping to SKR04 with OpenAI Assistant">
+  <meta itemprop="description" content="For the uninitiated in accounting, and tax reporting: though it must be absolutely standardised, everyone uses their own accounting “standards” (at the very least, they use their own accounting descriptions, and numbers)
+And when I say account numbers, it is not bank account numbers I mean. Every/any thing that happens in accouting goes to and comes from one or another account. That’s something we’ll address another day.
+Coming to the issue at hand: When clients report their accounting to tax consultants (who then must calculate the tax adjusted P&amp;L1 and Balance Sheet), the account numbering is based on the clients internal system.">
+  <meta itemprop="datePublished" content="2025-01-27T00:00:00+01:00">
+  <meta itemprop="dateModified" content="2025-11-07T12:17:25+01:00">
+  <meta itemprop="wordCount" content="724">
+  <meta itemprop="keywords" content="Kotaicode,Code,Tax,Ai">
+
+  
+  <link media="screen" rel="stylesheet" href='https://codicles.org/css/common.css'>
+  <link media="screen" rel="stylesheet" href='https://codicles.org/css/content.css'>
+
+  
+  
+  <title>Account Mapping to SKR04 with OpenAI Assistant - Code Chronicles (mostly)</title>
+  
+
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Account Mapping to SKR04 with OpenAI Assistant">
+  <meta name="twitter:description" content="For the uninitiated in accounting, and tax reporting: though it must be absolutely standardised, everyone uses their own accounting “standards” (at the very least, they use their own accounting descriptions, and numbers)
+And when I say account numbers, it is not bank account numbers I mean. Every/any thing that happens in accouting goes to and comes from one or another account. That’s something we’ll address another day.
+Coming to the issue at hand: When clients report their accounting to tax consultants (who then must calculate the tax adjusted P&amp;L1 and Balance Sheet), the account numbering is based on the clients internal system.">
+
+
+  
+<link rel="stylesheet" href='https://codicles.org/css/single.css'>
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1>
+    <a href="https://codicles.org/">Code Chronicles (mostly)</a>
+  </h1>
+
+  <nav>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/">Home</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/post/">Archives</a>
+    </span>
+    
+    <span class="nav-bar-item">
+      <a class="link" href="/about/">About</a>
+    </span>
+    
+  </nav>
+</header>
+
+    
+<main id="main" class="post">
+  
+  
+  <h1>Account Mapping to SKR04 with OpenAI Assistant</h1>
+  
+  <div>
+    <b>Keywords: </b>
+    
+    <a class="link" href='https://codicles.org/tags/kotaicode'>#kotaicode</a>
+    
+    <a class="link" href='https://codicles.org/tags/code'>#code</a>
+    
+    <a class="link" href='https://codicles.org/tags/tax'>#tax</a>
+    
+    <a class="link" href='https://codicles.org/tags/ai'>#ai</a>
+    
+  </div>
+  
+  
+  
+  <details>
+    <summary>
+      <b>Table of Contents</b>
+    </summary>
+    <div class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#poor-man-s-attempt">Poor man&rsquo;s attempt</a></li>
+    <li><a href="#rich-man-s-attempt">Rich man&rsquo;s attempt</a></li>
+    <li><a href="#the-pragmatist-s-approach">The pragmatist&rsquo;s approach</a></li>
+  </ul>
+</nav></div>
+  </details>
+  
+  
+  <article class="content">
+    
+    <p>For the uninitiated in accounting, and tax reporting: though it must be absolutely standardised, everyone uses their own accounting &ldquo;standards&rdquo; (at the very least, they use their own accounting descriptions, and numbers)</p>
+<p>And when I say account numbers, it is not bank account numbers I mean. Every/any thing that happens in accouting goes to and comes from one or another account. That&rsquo;s something we&rsquo;ll address another day.</p>
+<p>Coming to the issue at hand: When clients report their accounting to tax consultants (who then must calculate the tax adjusted P&amp;L<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> and Balance Sheet), the account numbering is based on the clients internal system.</p>
+<p>The tax consultant then has to take these, map them to the accepted standard<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> - SKR (StandardKontenRahmen) in Germany. <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p>As we have been working a lot with taxation - though this problem does not affect us directly - we decided to spend half a day on this. The members of our team were @Steffen, @Dimitar, @Pam, and yours truly.</p>
+<p><strong>How hard can it be?</strong></p>
+<h2 id="poor-man-s-attempt">Poor man&rsquo;s attempt</h2>
+<p>It all starts with taking the client&rsquo;s input (it is always excel) in on hand, and the SKR04<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> definitions on the other hand.</p>
+<p>A simple loop inside a loop was the first attempt. Loop through the lists and just compare all pairs to finally sort them based on (string) similarity.</p>
+<p>How rudimentary this may seem, it was actually somewhat effective, and already gave us a number of matches in the best match list. At least enough to rais our confidence.</p>
+<p>But it wasn&rsquo;t enough in the general sense, and was a failure when the client input was in English (failed matches all around)</p>
+<p>Here&rsquo;s the code<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">get_matching_account_names</span>(
+</span></span><span style="display:flex;"><span>    account_names: <span style="color:#a2f">list</span>[<span style="color:#a2f">str</span>], datev_account_names: <span style="color:#a2f">list</span>[<span style="color:#a2f">str</span>]
+</span></span><span style="display:flex;"><span>) <span style="color:#666">-&gt;</span> <span style="color:#a2f">tuple</span>[
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">dict</span>[<span style="color:#a2f">str</span>, <span style="color:#a2f">list</span>[<span style="color:#a2f">str</span>]],
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">dict</span>[<span style="color:#a2f">str</span>, <span style="color:#a2f">list</span>[<span style="color:#a2f">str</span>]],
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">dict</span>[<span style="color:#a2f">str</span>, <span style="color:#a2f">list</span>[<span style="color:#a2f">str</span>]],
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f">dict</span>[<span style="color:#a2f">str</span>, <span style="color:#a2f">list</span>[<span style="color:#a2f">str</span>]],
+</span></span><span style="display:flex;"><span>]:
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># Initialize dictionaries for different match levels</span>
+</span></span><span style="display:flex;"><span>    match_levels <span style="color:#666">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">&#34;best&#34;</span>: <span style="color:#a2f">dict</span>[<span style="color:#a2f">str</span>, <span style="color:#a2f">list</span>[<span style="color:#a2f">tuple</span>[<span style="color:#a2f">float</span>, <span style="color:#a2f">str</span>]]](),
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">&#34;close&#34;</span>: <span style="color:#a2f">dict</span>[<span style="color:#a2f">str</span>, <span style="color:#a2f">list</span>[<span style="color:#a2f">tuple</span>[<span style="color:#a2f">float</span>, <span style="color:#a2f">str</span>]]](),
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">&#34;okay&#34;</span>: <span style="color:#a2f">dict</span>[<span style="color:#a2f">str</span>, <span style="color:#a2f">list</span>[<span style="color:#a2f">tuple</span>[<span style="color:#a2f">float</span>, <span style="color:#a2f">str</span>]]](),
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">&#34;rest&#34;</span>: <span style="color:#a2f">dict</span>[<span style="color:#a2f">str</span>, <span style="color:#a2f">list</span>[<span style="color:#a2f">tuple</span>[<span style="color:#a2f">float</span>, <span style="color:#a2f">str</span>]]](),
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># Define similarity thresholds</span>
+</span></span><span style="display:flex;"><span>    thresholds <span style="color:#666">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">&#34;best&#34;</span>: <span style="color:#666">0.95</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">&#34;close&#34;</span>: <span style="color:#666">0.8</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">&#34;okay&#34;</span>: <span style="color:#666">0.6</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> account_name <span style="color:#a2f;font-weight:bold">in</span> account_names:
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># Initialize lists for each match level</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> level <span style="color:#a2f;font-weight:bold">in</span> match_levels:
+</span></span><span style="display:flex;"><span>            match_levels[level][account_name] <span style="color:#666">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> datev_account_name <span style="color:#a2f;font-weight:bold">in</span> datev_account_names:
+</span></span><span style="display:flex;"><span>            similarity <span style="color:#666">=</span> similar(account_name, datev_account_name)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> similarity <span style="color:#666">&gt;=</span> thresholds[<span style="color:#b44">&#34;best&#34;</span>]:
+</span></span><span style="display:flex;"><span>                match_levels[<span style="color:#b44">&#34;best&#34;</span>][account_name]<span style="color:#666">.</span>append(
+</span></span><span style="display:flex;"><span>                    (similarity, datev_account_name)
+</span></span><span style="display:flex;"><span>                )
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">elif</span> similarity <span style="color:#666">&gt;=</span> thresholds[<span style="color:#b44">&#34;close&#34;</span>]:
+</span></span><span style="display:flex;"><span>                match_levels[<span style="color:#b44">&#34;close&#34;</span>][account_name]<span style="color:#666">.</span>append(
+</span></span><span style="display:flex;"><span>                    (similarity, datev_account_name)
+</span></span><span style="display:flex;"><span>                )
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">elif</span> similarity <span style="color:#666">&gt;=</span> thresholds[<span style="color:#b44">&#34;okay&#34;</span>]:
+</span></span><span style="display:flex;"><span>                match_levels[<span style="color:#b44">&#34;okay&#34;</span>][account_name]<span style="color:#666">.</span>append(
+</span></span><span style="display:flex;"><span>                    (similarity, datev_account_name)
+</span></span><span style="display:flex;"><span>                )
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>                match_levels[<span style="color:#b44">&#34;rest&#34;</span>][account_name]<span style="color:#666">.</span>append(
+</span></span><span style="display:flex;"><span>                    (similarity, datev_account_name)
+</span></span><span style="display:flex;"><span>                )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic"># Sort the lists by similarity</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> level <span style="color:#a2f;font-weight:bold">in</span> match_levels:
+</span></span><span style="display:flex;"><span>            match_levels[level][account_name] <span style="color:#666">=</span> sort_by_similarity(
+</span></span><span style="display:flex;"><span>                match_levels[level][account_name]
+</span></span><span style="display:flex;"><span>            )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    best, close, okay, rest <span style="color:#666">=</span> [
+</span></span><span style="display:flex;"><span>        create_dict_to_list_from_dict_to_list_of_tuples(
+</span></span><span style="display:flex;"><span>            remove_keys_with_no_matches(match_levels[level])
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> level <span style="color:#a2f;font-weight:bold">in</span> [<span style="color:#b44">&#34;best&#34;</span>, <span style="color:#b44">&#34;close&#34;</span>, <span style="color:#b44">&#34;okay&#34;</span>, <span style="color:#b44">&#34;rest&#34;</span>]
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> best, close, okay, rest
+</span></span></code></pre></div><h2 id="rich-man-s-attempt">Rich man&rsquo;s attempt</h2>
+<p>Now that we were thrilled with two lists and two loops, we were ready to take the big guns. Throw everything to an LLM (OpenAI) and then get the result.</p>
+<p>The result was quite underwhelming. It wasn&rsquo;t too bad, but compared to what we received from simple loops, LLM didn&rsquo;t impress us.</p>
+<p>What impressed us was the speed with which our billing went up. With every request (test) we made, we could see our usage stats in OpenAI billing dashboard.</p>
+<p>The cost effectiveness (or lack thereof) discouraged us from continuing in this direction</p>
+<p>The code is here though<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># Step 3: Function to compare account descriptions using the Chat Completion API</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">def</span> <span style="color:#00a000">find_best_match</span>(new_account_desc: <span style="color:#a2f">str</span>, datev_accounts: <span style="color:#a2f">list</span>[<span style="color:#a2f">str</span>]) <span style="color:#666">-&gt;</span> <span style="color:#a2f">list</span>[<span style="color:#a2f">str</span>]:
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># Prepare the conversation prompt</span>
+</span></span><span style="display:flex;"><span>    system_message <span style="color:#666">=</span> <span style="color:#b44">&#34;You are an expert assistant that matches account descriptions to find the 3 closest semantic matches. Just provide the description of the new accounts without any further explanation or numbering, just split them by semi colon&#34;</span>
+</span></span><span style="display:flex;"><span>    user_message <span style="color:#666">=</span> (
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">f</span><span style="color:#b44">&#34;Here is a list of account descriptions:</span><span style="color:#b62;font-weight:bold">\n</span><span style="color:#b44">&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">f</span><span style="color:#b44">&#34;</span><span style="color:#b68;font-weight:bold">{</span><span style="color:#b44">&#39;, &#39;</span><span style="color:#666">.</span>join(datev_accounts)<span style="color:#b68;font-weight:bold">}</span><span style="color:#b62;font-weight:bold">\n</span><span style="color:#b44">&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#b44">f</span><span style="color:#b44">&#34;Match the following description to the closest one in the list: &#39;</span><span style="color:#b68;font-weight:bold">{</span>new_account_desc<span style="color:#b68;font-weight:bold">}</span><span style="color:#b44">&#39;&#34;</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># Send request to OpenAI API</span>
+</span></span><span style="display:flex;"><span>    response <span style="color:#666">=</span> openai<span style="color:#666">.</span>chat<span style="color:#666">.</span>completions<span style="color:#666">.</span>create(
+</span></span><span style="display:flex;"><span>        model<span style="color:#666">=</span><span style="color:#b44">&#34;gpt-4o&#34;</span>,  <span style="color:#080;font-style:italic"># Replace with gpt-3.5-turbo if preferred</span>
+</span></span><span style="display:flex;"><span>        messages<span style="color:#666">=</span>[
+</span></span><span style="display:flex;"><span>            {<span style="color:#b44">&#34;role&#34;</span>: <span style="color:#b44">&#34;system&#34;</span>, <span style="color:#b44">&#34;content&#34;</span>: system_message},
+</span></span><span style="display:flex;"><span>            {<span style="color:#b44">&#34;role&#34;</span>: <span style="color:#b44">&#34;user&#34;</span>, <span style="color:#b44">&#34;content&#34;</span>: user_message},
+</span></span><span style="display:flex;"><span>        ],
+</span></span><span style="display:flex;"><span>        max_tokens<span style="color:#666">=</span><span style="color:#666">100</span>,
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic"># Extract and return the model&#39;s response</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> response<span style="color:#666">.</span>choices[<span style="color:#666">0</span>]<span style="color:#666">.</span>message<span style="color:#666">.</span>content<span style="color:#666">.</span>strip()
+</span></span></code></pre></div><h2 id="the-pragmatist-s-approach">The pragmatist&rsquo;s approach</h2>
+<p>WIP</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Profit and Loss&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Accepted accounting standard is set by DATEV (effectively)&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Our story happens in Germany&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>SKR04 was our chosen version of SKR as the cases we usually deal with had to do with this version.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>In the time restricted hackathon day, we didn&rsquo;t care much about &ldquo;style&rdquo;&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6">
+<p>Perhaps we should have worked more on our prompt; But for usage stats we saw, we stopped pretty quickly.&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+    
+  </article>
+  <div class="paginator">
+    
+    <a class="link" href="https://codicles.org/post/server-requirements/">← prev</a>
+    
+    
+    <a class="link" href="https://codicles.org/post/nextjs-isnt-all-that-bad/">next →</a>
+    
+  </div>
+  <div class="comment">
+    
+    
+    
+    
+    
+    
+  </div>
+  
+</main>
+
+    <footer id="footer">
+  <div>
+    <span>© 2019</span> - <span>2025</span>
+  </div>
+
+  <div>
+    <span>Powered by </span>
+    <a class="link" href="https://gohugo.io/">Hugo</a>
+    <span> 🍦 Theme </span>
+    <a class="link" href="https://github.com/queensferryme/hugo-theme-texify">TeXify</a>
+  </div>
+
+  <div class="footnote">
+    <span>        Follow me on <a class=link href=https://github.com/sillyfellow>GitHub</a>,
+        <a class=link href=https://twitter.com/sadanandeep>Twitter</a> or
+        <a class=link href=/index.xml>RSS</a> |
+        <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener>CC BY-NC-SA 4.0</a>
+        </span>
+  </div>
+</footer>
+
+  </div>
+
+  
+  
+  <link media="screen" rel="stylesheet" href="https://codicles.org/css/custom.css" />
+  
+
+  
+  
+  <script src="https://codicles.org/js/custom.js"></script>
+  
+
+</body>
+
+</html>
